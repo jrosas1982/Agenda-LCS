@@ -6,7 +6,6 @@
 	<name>Agenda App</name>
 	<description>Aplicacion desktop</description>
   
-  
     <developers>
         <developer>
             <id>9999999</id>
@@ -39,13 +38,14 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+
         
         <!-- Jasperreports -->
-		<dependency>
+	 <!-- 	<dependency>
 		    <groupId>net.sf.jasperreports</groupId>
 		    <artifactId>jasperreports</artifactId>
 		    <version>6.0.0</version>
-		</dependency>
+		</dependency> --> 
 	    <!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
 		<dependency>
 		    <groupId>commons-logging</groupId>
@@ -57,11 +57,27 @@
 		<dependency>
 		    <groupId>mysql</groupId>
 		    <artifactId>mysql-connector-java</artifactId>
+<!-- 		     <artifactId>dev.mysql.com</artifactId>  -->	
+	    
 		    <!--<version>5.1.6</version>-->
-		    <!-- USAR LA VERSIÓN 5.1.44 SI USÁS MYSQL8 --> 
-		    <version>5.1.44</version>
-		</dependency>
+		    <!-- USAR LA VERSIÓN 5.1.44 SI USÁS MYSQL8 --> 		    
+		   <version>8.0.26</version> 
+<!--     <version>5.1.44</version> 
+ --> 		</dependency>
 
+<!-- Jasper Report -->
+    <dependency>
+          <groupId>net.sf.jasperreports</groupId>
+          <artifactId>jasperreports</artifactId>
+  			<version>3.6.0</version>
+          <exclusions>
+              <exclusion>
+                  <groupId>com.lowagie</groupId>
+                  <artifactId>itext</artifactId>
+              </exclusion>
+          </exclusions>
+    </dependency>
+    
     </dependencies>
 
     <build>
