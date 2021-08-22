@@ -82,6 +82,8 @@ public class VentanaPersona extends JFrame
 	{
 		return txtTelefono;
 	}
+	
+
 
 	public JButton getBtnAgregarPersona() 
 	{

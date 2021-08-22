@@ -8,18 +8,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import persistencia.conexion.Conexion;
+import persistencia.dao.interfaz.PaisDAO;
 import persistencia.dao.interfaz.PersonaDAO;
+import persistencia.dao.interfaz.TipoContactoDAO;
+import dto.PaisDTO;
 import dto.PersonaDTO;
+import dto.TipoContactoDTO;
 
-public class PersonaDAOSQL implements PersonaDAO
+public class PaisDAOSQL implements PaisDAO
 {
-	private static final String insert = "INSERT INTO personas(idPersona, nombre, telefono) VALUES(?, ?, ?)";
-	private static final String delete = "DELETE FROM personas WHERE idPersona = ?";
-	private static final String readall = "SELECT * FROM personas";
-	private static final String update = "UPDATE personas SET nombre = ?, telefono = ? WHERE idPersona = ?";
+	private static final String insert = "INSERT INTO pais(id, nombre) VALUES(?, ?)";
+	private static final String delete = "DELETE FROM pais WHERE id = ?";
+	private static final String readall = "SELECT * FROM pais";
+	private static final String update = "UPDATE pais SET nombre = ? WHERE id = ?";
 	
-	
-	public boolean insert(PersonaDTO persona)
+	public boolean insert(PaisDTO pais)
 	{
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -27,9 +30,8 @@ public class PersonaDAOSQL implements PersonaDAO
 		try
 		{
 			statement = conexion.prepareStatement(insert);
-			statement.setInt(1, persona.getIdPersona());
-			statement.setString(2, persona.getNombre());
-			statement.setString(3, persona.getTelefono());
+			statement.setInt(1, pais.getIdPais());
+			statement.setString(2, pais.getnombrePais());
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -49,7 +51,7 @@ public class PersonaDAOSQL implements PersonaDAO
 		return isInsertExitoso;
 	}
 	
-	public boolean delete(PersonaDTO persona_a_eliminar)
+	public boolean delete(PaisDTO pais_a_eliminar)
 	{
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -57,7 +59,7 @@ public class PersonaDAOSQL implements PersonaDAO
 		try 
 		{
 			statement = conexion.prepareStatement(delete);
-			statement.setString(1, Integer.toString(persona_a_eliminar.getIdPersona()));
+			statement.setString(1, Integer.toString(pais_a_eliminar.getIdPais()));
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -71,11 +73,11 @@ public class PersonaDAOSQL implements PersonaDAO
 		return isdeleteExitoso;
 	}
 	
-	public List<PersonaDTO> readAll()
+	public List<PaisDTO> readAll()
 	{
 		PreparedStatement statement;
 		ResultSet resultSet; //Guarda el resultado de la query
-		ArrayList<PersonaDTO> personas = new ArrayList<PersonaDTO>();
+		ArrayList<PaisDTO> paises = new ArrayList<PaisDTO>();
 		Conexion conexion = Conexion.getConexion();
 		try 
 		{
@@ -83,34 +85,32 @@ public class PersonaDAOSQL implements PersonaDAO
 			resultSet = statement.executeQuery();
 			while(resultSet.next())
 			{
-				personas.add(getPersonaDTO(resultSet));
+				paises.add(getPaisDTO(resultSet));
 			}
 		} 
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
 		}
-		return personas;
+		return paises;
 	}
 	
-	private PersonaDTO getPersonaDTO(ResultSet resultSet) throws SQLException
+	private PaisDTO getPaisDTO(ResultSet resultSet) throws SQLException
 	{
-		int id = resultSet.getInt("idPersona");
+		int id = resultSet.getInt("id");
 		String nombre = resultSet.getString("Nombre");
-		String tel = resultSet.getString("Telefono");
-		return new PersonaDTO(id, nombre, tel);
+		return new PaisDTO(id, nombre);
 	}
 
-	public boolean update(PersonaDTO persona) {
+	public boolean update(PaisDTO pais) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isUpdatedSuccess = false;
 		try
 		{
 			statement = conexion.prepareStatement(update);
-			statement.setString(1, persona.getNombre());
-			statement.setString(2, persona.getTelefono());
-			statement.setInt(3, persona.getIdPersona());
+			statement.setString(1, pais.getnombrePais());
+			statement.setInt(2, pais.getIdPais());
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
