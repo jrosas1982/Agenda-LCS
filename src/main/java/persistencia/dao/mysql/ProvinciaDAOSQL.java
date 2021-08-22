@@ -8,18 +8,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import persistencia.conexion.Conexion;
-import persistencia.dao.interfaz.PersonaDAO;
-import dto.PersonaDTO;
+import persistencia.dao.interfaz.ProvinciaDAO;
+import dto.ProvinciaDTO;
 
-public class PersonaDAOSQL implements PersonaDAO
+
+public class ProvinciaDAOSQL implements ProvinciaDAO
 {
-	private static final String insert = "INSERT INTO personas(idPersona, nombre, telefono) VALUES(?, ?, ?)";
-	private static final String delete = "DELETE FROM personas WHERE idPersona = ?";
-	private static final String readall = "SELECT * FROM personas";
-	private static final String update = "UPDATE personas SET nombre = ?, telefono = ? WHERE idPersona = ?";
-	
-	
-	public boolean insert(PersonaDTO persona)
+	private static final String insert = "INSERT INTO provincia(id, nombre,idPais) VALUES(?, ?, ?)";
+	private static final String delete = "DELETE FROM provincia WHERE id = ?";
+	private static final String readall = "SELECT * FROM provincia";
+	private static final String update = "UPDATE provincia SET nombre = ? , idPais = ? WHERE id = ?";
+	private static final String readallbyidpais = "SELECT * FROM provincia WHERE idPais = ?";
+
+	public boolean insert(ProvinciaDTO prv)
 	{
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -27,9 +28,9 @@ public class PersonaDAOSQL implements PersonaDAO
 		try
 		{
 			statement = conexion.prepareStatement(insert);
-			statement.setInt(1, persona.getIdPersona());
-			statement.setString(2, persona.getNombre());
-			statement.setString(3, persona.getTelefono());
+			statement.setInt(1, prv.getIdProvincia());
+			statement.setString(2, prv.getnombreProvincia());
+			statement.setInt(3, prv.getIdPais());
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -49,7 +50,7 @@ public class PersonaDAOSQL implements PersonaDAO
 		return isInsertExitoso;
 	}
 	
-	public boolean delete(PersonaDTO persona_a_eliminar)
+	public boolean delete(ProvinciaDTO prv_a_eliminar)
 	{
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -57,7 +58,7 @@ public class PersonaDAOSQL implements PersonaDAO
 		try 
 		{
 			statement = conexion.prepareStatement(delete);
-			statement.setString(1, Integer.toString(persona_a_eliminar.getIdPersona()));
+			statement.setString(1, Integer.toString(prv_a_eliminar.getIdProvincia()));
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -71,11 +72,11 @@ public class PersonaDAOSQL implements PersonaDAO
 		return isdeleteExitoso;
 	}
 	
-	public List<PersonaDTO> readAll()
+	public List<ProvinciaDTO> readAll()
 	{
 		PreparedStatement statement;
 		ResultSet resultSet; //Guarda el resultado de la query
-		ArrayList<PersonaDTO> personas = new ArrayList<PersonaDTO>();
+		ArrayList<ProvinciaDTO> prvs = new ArrayList<ProvinciaDTO>();
 		Conexion conexion = Conexion.getConexion();
 		try 
 		{
@@ -83,34 +84,34 @@ public class PersonaDAOSQL implements PersonaDAO
 			resultSet = statement.executeQuery();
 			while(resultSet.next())
 			{
-				personas.add(getPersonaDTO(resultSet));
+				prvs.add(getProvinciaDTO(resultSet));
 			}
 		} 
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
 		}
-		return personas;
+		return prvs;
 	}
 	
-	private PersonaDTO getPersonaDTO(ResultSet resultSet) throws SQLException
+	private ProvinciaDTO getProvinciaDTO(ResultSet resultSet) throws SQLException
 	{
-		int id = resultSet.getInt("idPersona");
+		int id = resultSet.getInt("id");
 		String nombre = resultSet.getString("Nombre");
-		String tel = resultSet.getString("Telefono");
-		return new PersonaDTO(id, nombre, tel);
+		int idPais = resultSet.getInt("idPais");
+		return new ProvinciaDTO(id, nombre, idPais);
 	}
 
-	public boolean update(PersonaDTO persona) {
+	public boolean update(ProvinciaDTO prv) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isUpdatedSuccess = false;
 		try
 		{
 			statement = conexion.prepareStatement(update);
-			statement.setString(1, persona.getNombre());
-			statement.setString(2, persona.getTelefono());
-			statement.setInt(3, persona.getIdPersona());
+			statement.setString(1, prv.getnombreProvincia());
+			statement.setInt(2, prv.getIdPais());
+			statement.setInt(3, prv.getIdProvincia());
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -128,5 +129,29 @@ public class PersonaDAOSQL implements PersonaDAO
 		}
 		
 		return isUpdatedSuccess;
+	}
+
+	@Override
+	public List<ProvinciaDTO> readAllById(int idPais) {
+		
+		PreparedStatement statement;
+		ResultSet resultSet; //Guarda el resultado de la query
+		ArrayList<ProvinciaDTO> prvs = new ArrayList<ProvinciaDTO>();
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(readallbyidpais);
+			statement.setInt(1, idPais);
+			resultSet = statement.executeQuery();
+			while(resultSet.next())
+			{
+				prvs.add(getProvinciaDTO(resultSet));
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return prvs;
 	}
 }

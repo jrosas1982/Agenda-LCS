@@ -16,6 +16,8 @@ import dto.PersonaDTO;
 import javax.swing.JButton;
 
 import persistencia.conexion.Conexion;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 public class Vista
 {
@@ -24,8 +26,13 @@ public class Vista
 	private JButton btnAgregar;
 	private JButton btnBorrar;
 	private JButton btnReporte;
+	private JButton btnNewContacto;
 	private DefaultTableModel modelPersonas;
 	private  String[] nombreColumnas = {"Nombre y apellido","Telefono"};
+	private JLabel lblGestion;
+	private JButton btnLocalidaABM;
+	private JButton btnProvinciaABM;
+	private JButton btnPaisABM;
 
 	public Vista() 
 	{
@@ -37,17 +44,17 @@ public class Vista
 	private void initialize() 
 	{
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 809, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 434, 262);
+		panel.setBounds(0, 0, 426, 262);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JScrollPane spPersonas = new JScrollPane();
-		spPersonas.setBounds(10, 11, 414, 182);
+		spPersonas.setBounds(10, 11, 405, 182);
 		panel.add(spPersonas);
 		
 		modelPersonas = new DefaultTableModel(null,nombreColumnas);
@@ -75,6 +82,27 @@ public class Vista
 		btnReporte = new JButton("Reporte");
 		btnReporte.setBounds(307, 228, 89, 23);
 		panel.add(btnReporte);
+		
+		btnNewContacto = new JButton("ABM Tipo de Contacto");
+		btnNewContacto.setBounds(436, 40, 147, 23);
+		frame.getContentPane().add(btnNewContacto);
+		
+		lblGestion = new JLabel("Gestión");
+		lblGestion.setHorizontalAlignment(SwingConstants.CENTER);
+		lblGestion.setBounds(436, 15, 347, 14);
+		frame.getContentPane().add(lblGestion);
+		
+		btnLocalidaABM = new JButton("ABM Localida");
+		btnLocalidaABM.setBounds(436, 74, 147, 23);
+		frame.getContentPane().add(btnLocalidaABM);
+		
+		btnProvinciaABM = new JButton("ABM Provincia");
+		btnProvinciaABM.setBounds(436, 108, 147, 23);
+		frame.getContentPane().add(btnProvinciaABM);
+		
+		btnPaisABM = new JButton("ABM País");
+		btnPaisABM.setBounds(436, 142, 147, 23);
+		frame.getContentPane().add(btnPaisABM);
 	}
 	
 	public void show()
@@ -97,6 +125,27 @@ public class Vista
 		this.frame.setVisible(true);
 	}
 	
+	//-- nuevo contacto
+	public JButton getBtnContacto() 
+	{
+		return btnNewContacto;
+	}
+	//-- nuevo pais
+	public JButton getBtnPaisABM() 
+	{
+		return btnPaisABM;
+	}
+	//-- nueva provincia
+	public JButton getBtnProvinciaABM() 
+	{
+		return btnProvinciaABM;
+	}
+	//-- nueva Localidad
+	public JButton getBtnLocalidadABM() 
+	{
+		return btnLocalidaABM;
+	}
+	//--
 	public JButton getBtnAgregar() 
 	{
 		return btnAgregar;

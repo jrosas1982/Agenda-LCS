@@ -8,18 +8,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import persistencia.conexion.Conexion;
-import persistencia.dao.interfaz.PersonaDAO;
-import dto.PersonaDTO;
 
-public class PersonaDAOSQL implements PersonaDAO
+import persistencia.dao.interfaz.TipoContactoDAO;
+
+import dto.TipoContactoDTO;
+
+public class TipoContactoDAOSQL implements TipoContactoDAO
 {
-	private static final String insert = "INSERT INTO personas(idPersona, nombre, telefono) VALUES(?, ?, ?)";
-	private static final String delete = "DELETE FROM personas WHERE idPersona = ?";
-	private static final String readall = "SELECT * FROM personas";
-	private static final String update = "UPDATE personas SET nombre = ?, telefono = ? WHERE idPersona = ?";
+	private static final String insert = "INSERT INTO tipocontacto(id, nombre) VALUES(?, ?)";
+	private static final String delete = "DELETE FROM tipocontacto WHERE id = ?";
+	private static final String readall = "SELECT * FROM tipocontacto";
+	private static final String update = "UPDATE tipocontacto SET nombre = ? WHERE id = ?";
 	
 	
-	public boolean insert(PersonaDTO persona)
+	public boolean insert(TipoContactoDTO tipoContacto)
 	{
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -27,9 +29,8 @@ public class PersonaDAOSQL implements PersonaDAO
 		try
 		{
 			statement = conexion.prepareStatement(insert);
-			statement.setInt(1, persona.getIdPersona());
-			statement.setString(2, persona.getNombre());
-			statement.setString(3, persona.getTelefono());
+			statement.setInt(1, tipoContacto.getIdTipoContacto());
+			statement.setString(2, tipoContacto.getnombreTipoContacto());
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -49,7 +50,7 @@ public class PersonaDAOSQL implements PersonaDAO
 		return isInsertExitoso;
 	}
 	
-	public boolean delete(PersonaDTO persona_a_eliminar)
+	public boolean delete(TipoContactoDTO tipoContacto_a_eliminar)
 	{
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -57,7 +58,7 @@ public class PersonaDAOSQL implements PersonaDAO
 		try 
 		{
 			statement = conexion.prepareStatement(delete);
-			statement.setString(1, Integer.toString(persona_a_eliminar.getIdPersona()));
+			statement.setString(1, Integer.toString(tipoContacto_a_eliminar.getIdTipoContacto()));
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -71,11 +72,11 @@ public class PersonaDAOSQL implements PersonaDAO
 		return isdeleteExitoso;
 	}
 	
-	public List<PersonaDTO> readAll()
+	public List<TipoContactoDTO> readAll()
 	{
 		PreparedStatement statement;
 		ResultSet resultSet; //Guarda el resultado de la query
-		ArrayList<PersonaDTO> personas = new ArrayList<PersonaDTO>();
+		ArrayList<TipoContactoDTO> tipoContacto = new ArrayList<TipoContactoDTO>();
 		Conexion conexion = Conexion.getConexion();
 		try 
 		{
@@ -83,34 +84,32 @@ public class PersonaDAOSQL implements PersonaDAO
 			resultSet = statement.executeQuery();
 			while(resultSet.next())
 			{
-				personas.add(getPersonaDTO(resultSet));
+				tipoContacto.add(getTipoContactoDTO(resultSet));
 			}
 		} 
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
 		}
-		return personas;
+		return tipoContacto;
 	}
 	
-	private PersonaDTO getPersonaDTO(ResultSet resultSet) throws SQLException
+	private TipoContactoDTO getTipoContactoDTO(ResultSet resultSet) throws SQLException
 	{
-		int id = resultSet.getInt("idPersona");
+		int idTipoContacto = resultSet.getInt("id");
 		String nombre = resultSet.getString("Nombre");
-		String tel = resultSet.getString("Telefono");
-		return new PersonaDTO(id, nombre, tel);
+		return new TipoContactoDTO(idTipoContacto, nombre);
 	}
 
-	public boolean update(PersonaDTO persona) {
+	public boolean update(TipoContactoDTO tipoContacto) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isUpdatedSuccess = false;
 		try
 		{
 			statement = conexion.prepareStatement(update);
-			statement.setString(1, persona.getNombre());
-			statement.setString(2, persona.getTelefono());
-			statement.setInt(3, persona.getIdPersona());
+			statement.setString(1, tipoContacto.getnombreTipoContacto());
+			statement.setInt(2, tipoContacto.getIdTipoContacto());
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
