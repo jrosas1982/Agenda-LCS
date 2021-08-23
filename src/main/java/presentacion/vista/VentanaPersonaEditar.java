@@ -11,6 +11,7 @@ import dto.TipoContactoDTO;
 import dto.PaisDTO;
 import dto.ProvinciaDTO;
 import dto.LocalidadDTO;
+import java.awt.Color;
 
 public class VentanaPersonaEditar extends JFrame 
 {
@@ -33,6 +34,7 @@ public class VentanaPersonaEditar extends JFrame
 	private JComboBox<PaisDTO> comboPais;
 	private JComboBox<TipoContactoDTO> comboTipoContacto;
 	private JComboBox<LocalidadDTO> comboLocalidad;	
+	private JTextField text_ID;
 	
 	
 	
@@ -52,14 +54,14 @@ public class VentanaPersonaEditar extends JFrame
 		super();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 343, 464);
+		setBounds(100, 100, 393, 464);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 11, 307, 411);
+		panel.setBounds(10, 11, 357, 411);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -90,7 +92,7 @@ public class VentanaPersonaEditar extends JFrame
 		panel.add(lblTipContacto);
 		
 		JLabel lblDomicilio = new JLabel("Domicilio");
-		lblDomicilio.setBounds(25, 173, 46, 14);
+		lblDomicilio.setBounds(10, 173, 94, 14);
 		panel.add(lblDomicilio);
 		
 		JLabel lblCalle = new JLabel("Calle");
@@ -106,7 +108,7 @@ public class VentanaPersonaEditar extends JFrame
 		panel.add(lblPiso);
 		
 		JLabel lblDepto = new JLabel("Depto");
-		lblDepto.setBounds(242, 237, 29, 14);
+		lblDepto.setBounds(250, 237, 29, 14);
 		panel.add(lblDepto);
 				
 		JLabel lblPais = new JLabel("País");
@@ -124,17 +126,17 @@ public class VentanaPersonaEditar extends JFrame
 		
 		
 		txtNombre = new JTextField();
-		txtNombre.setBounds(114, 8, 183, 20);
+		txtNombre.setBounds(114, 8, 221, 20);
 		panel.add(txtNombre);
 		txtNombre.setColumns(10);
 		
 		txtTelefono = new JTextField();
-		txtTelefono.setBounds(114, 35, 183, 20);
+		txtTelefono.setBounds(114, 35, 221, 20);
 		panel.add(txtTelefono);
 		txtTelefono.setColumns(10);
 		
 		txtEmail = new JTextField();
-		txtEmail.setBounds(114, 62, 183, 20);
+		txtEmail.setBounds(114, 62, 221, 20);
 		panel.add(txtEmail);
 		txtEmail.setColumns(10);
 		
@@ -144,7 +146,7 @@ public class VentanaPersonaEditar extends JFrame
 		txtCumpleaños.setColumns(10);
 		
 		txtCalle = new JTextField();
-		txtCalle.setBounds(114, 209, 183, 20);
+		txtCalle.setBounds(114, 209, 221, 20);
 		panel.add(txtCalle);
 		txtCalle.setColumns(10);
 		
@@ -154,36 +156,42 @@ public class VentanaPersonaEditar extends JFrame
 		txtAltura.setColumns(10);
 		
 		txtPiso = new JTextField();
-		txtPiso.setBounds(208, 234, 24, 20);
+		txtPiso.setBounds(208, 234, 36, 20);
 		panel.add(txtPiso);
 		txtPiso.setColumns(10);
 		
 		txtDepto = new JTextField();
-		txtDepto.setBounds(273, 234, 24, 20);
+		txtDepto.setBounds(289, 234, 46, 20);
 		panel.add(txtDepto);
 		txtDepto.setColumns(10);
 		
 
 		comboTipoContacto = new JComboBox<TipoContactoDTO>();
-		comboTipoContacto.setBounds(114, 128, 164, 18);
+		comboTipoContacto.setBounds(114, 128, 221, 18);
 		panel.add(comboTipoContacto);
 		
 		comboPais = new JComboBox<PaisDTO>();
-		comboPais.setBounds(114, 270, 164, 18);
+		comboPais.setBounds(114, 270, 221, 18);
 		panel.add(comboPais);
 		
 		comboProvincia = new JComboBox<ProvinciaDTO>();
-		comboProvincia.setBounds(114, 305, 164, 18);
+		comboProvincia.setBounds(114, 305, 221, 18);
 		panel.add(comboProvincia);
 		
 		comboLocalidad = new JComboBox<LocalidadDTO>();
-		comboLocalidad.setBounds(114, 338, 164, 18);
+		comboLocalidad.setBounds(114, 338, 221, 18);
 		panel.add(comboLocalidad);
 		
 		
-		btnAgregarPersona = new JButton("Agregar");
-		btnAgregarPersona.setBounds(208, 374, 89, 23);
+		btnAgregarPersona = new JButton("Actualizar");
+		btnAgregarPersona.setBounds(246, 377, 89, 23);
 		panel.add(btnAgregarPersona);
+		
+		text_ID = new JTextField();
+		text_ID.setBounds(10, 378, 86, 20);
+		text_ID.setVisible(false);
+		panel.add(text_ID);
+
 		
 		
 		this.setVisible(false);
@@ -230,6 +238,14 @@ public class VentanaPersonaEditar extends JFrame
 		return txtEmail;
 	}
 	
+	public JTextField getText_ID() {
+		return text_ID;
+	}
+
+	public void setText_ID(JTextField text_ID) {
+		this.text_ID = text_ID;
+	}
+
 	public JTextField getTxtFCumple() 
 	{
 		return txtCumpleaños;
@@ -252,6 +268,11 @@ public class VentanaPersonaEditar extends JFrame
 		return comboPais;
 	}
 	
+	public JComboBox<TipoContactoDTO> getComboTipoContacto()
+	{
+		return comboTipoContacto;
+	}
+	
 	
 	public JButton getBtnAgregarPersona() 
 	{
@@ -264,6 +285,4 @@ public class VentanaPersonaEditar extends JFrame
 		this.txtTelefono.setText(null);
 		this.dispose();
 	}
-	
-	
 }

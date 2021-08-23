@@ -45,6 +45,11 @@ public class Agenda
 		this.persona.delete(persona_a_eliminar);
 	}
 	
+	public PersonaDTO buscarPersona(int persona_a_editar) 
+	{
+		return this.persona.geyById(persona_a_editar);
+	}
+	
 	public void editarPersona(PersonaDTO persona_a_editar) 
 	{
 		this.persona.update(persona_a_editar);

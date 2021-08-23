@@ -2,6 +2,8 @@ package dto;
 
 public class PersonaDTO 
 {
+
+
 	private int idPersona;
 	private String nombre;
 	private String telefono;	
@@ -15,8 +17,12 @@ public class PersonaDTO
 	private int idTipoContacto;
 	private String nombreLocalidad;
 	private String nombreContacto;
-
-	public PersonaDTO(int idPersona, String nombre, String telefono, String calle, int altura, int piso, String depto, String email, String fCumple, int idLocalidad, int idTipoContacto)
+	private int idProvincia;
+	private int idPais;
+	private String nombreProvincia;
+	private String nombrePais;
+	
+	public PersonaDTO(int idPersona, String nombre, String telefono, String calle, int altura, int piso, String depto, String email, String fCumple, int idLocalidad, int idTipoContacto , int idProvincia , int idPais)
 	{
 		this.idPersona = idPersona;
 		this.nombre = nombre;
@@ -29,10 +35,11 @@ public class PersonaDTO
 		this.fCumple = fCumple;
 		this.idLocalidad = idLocalidad;
 		this.idTipoContacto = idTipoContacto;
+		this.idProvincia = idProvincia;
 	}
 	
 	
-	public PersonaDTO(int idPersona, String nombre, String telefono, String calle, int altura, int piso, String depto, String email, String fCumple, String nombreLocalidad, String nombreContacto)
+	public PersonaDTO(int idPersona, String nombre, String telefono, String calle, int altura, int piso, String depto, String email, String fCumple, String nombreLocalidad, String nombreContacto , String nombreProvincia , String nombrePais)
 	{
 		this.idPersona = idPersona;
 		this.nombre = nombre;
@@ -45,10 +52,23 @@ public class PersonaDTO
 		this.fCumple = fCumple;
 		this.nombreLocalidad = nombreLocalidad;
 		this.nombreContacto = nombreContacto;
+		this.nombreProvincia = nombreProvincia;
+		this.nombrePais = nombrePais;
 	}
 	
+	public PersonaDTO() {
+		
+	}
 	
-	
+	public int getIdPais() {
+		return idPais;
+	}
+
+
+	public void setIdPais(int idPais) {
+		this.idPais = idPais;
+	}
+
 	
 	public String getNombreLocalidad() {
 		return nombreLocalidad;
@@ -113,7 +133,15 @@ public class PersonaDTO
 		this.calle = calle;
 	
 	}
-	
+	public int getIdProvincia() {
+		return idProvincia;
+	}
+
+
+	public void setIdProvincia(int idProvincia) {
+		this.idProvincia = idProvincia;
+	}
+
 	public void setAltura(int altura) 
 	{
 		this.altura = altura;
@@ -185,6 +213,26 @@ public class PersonaDTO
 	public void setIdTipoContacto(int idTipoContacto) 
 	{
 		this.idTipoContacto = idTipoContacto;
+	}
+
+
+	public String getNombreProvincia() {
+		return nombreProvincia;
+	}
+
+
+	public String getNombrePais() {
+		return nombrePais;
+	}
+
+
+	public void setNombreProvincia(String nombreProvincia) {
+		this.nombreProvincia = nombreProvincia;
+	}
+
+
+	public void setNombrePais(String nombrePais) {
+		this.nombrePais = nombrePais;
 	}
 	
 	
