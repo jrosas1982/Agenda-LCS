@@ -15,4 +15,6 @@ public interface PersonaDAO
 	
 	public boolean update(PersonaDTO persona);
 	
+	public PersonaDTO geyById(int id);	
+	
 }

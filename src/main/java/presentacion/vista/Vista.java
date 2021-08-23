@@ -35,11 +35,12 @@ public class Vista
 	private JButton btnReporte;
 	private JButton btnNewContacto;
 	private DefaultTableModel modelPersonas;
-	private  String[] nombreColumnas = {"Nombre y apellido","Telefono", "Calle", "Altura", "Piso", "Depto", "Localidad", "e-mail", "Cumpleaños"};
+	private  String[] nombreColumnas = {"ID", "Nombre y apellido","Telefono", "Calle", "Altura", "Piso", "Depto", "Localidad", "e-mail", "Cumpleaños", "Tipo Contacto"};
 	private JLabel lblGestion;
 	private JButton btnLocalidaABM;
 	private JButton btnProvinciaABM;
 	private JButton btnPaisABM;
+	private JButton btnEditar;
 	
 	private Agenda agenda;
 
@@ -53,17 +54,17 @@ public class Vista
 	private void initialize() 
 	{
 		frame = new JFrame();
-		frame.setBounds(100, 100, 678, 320);
+		frame.setBounds(100, 100, 1082, 320);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 652, 224);
+		panel.setBounds(0, 0, 1056, 224);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JScrollPane spPersonas = new JScrollPane();
-		spPersonas.setBounds(10, 11, 642, 171);
+		spPersonas.setBounds(10, 11, 1036, 171);
 		panel.add(spPersonas);
 		
 		modelPersonas = new DefaultTableModel(null,nombreColumnas);
@@ -80,7 +81,7 @@ public class Vista
 		btnAgregar.setBounds(20, 193, 89, 23);
 		panel.add(btnAgregar);
 		
-		JButton btnEditar = new JButton("Editar");
+		btnEditar = new JButton("Editar");
 		btnEditar.setBounds(119, 193, 89, 23);
 		panel.add(btnEditar);
 		
@@ -99,7 +100,7 @@ public class Vista
 		lblGestion = new JLabel("Gestión");
 		lblGestion.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblGestion.setHorizontalAlignment(SwingConstants.CENTER);
-		lblGestion.setBounds(192, 235, 292, 14);
+		lblGestion.setBounds(192, 227, 292, 14);
 		frame.getContentPane().add(lblGestion);
 		
 		btnLocalidaABM = new JButton("ABM Localida");
@@ -186,6 +187,10 @@ public class Vista
 		return nombreColumnas;
 	}
 
+	public JButton getBtnEditar() 
+	{
+		return btnEditar;
+	}
 
 	public void llenarTabla(List<PersonaDTO> personasEnTabla) {
 		this.getModelPersonas().setRowCount(0); //Para vaciar la tabla
@@ -194,6 +199,7 @@ public class Vista
 
 		for (PersonaDTO p : personasEnTabla)
 		{
+			int idPersona = p.getIdPersona();
 			String nombre = p.getNombre();
 			String tel = p.getTelefono();
 			String calle = p.getCalle();
@@ -202,14 +208,12 @@ public class Vista
 			String depto = p.getDepto();
 			String email = p.getEmail();
 			String fCumple = p.getFCumple();
-			int idLocalidad = p.getIdLocalidad();
+			String nombreLocalidad = p.getNombreLocalidad();
+			String nombreContacto = p.getNombreContacto();
 							
-//			List<LocalidadDTO> listaLocalidades = new ArrayList<LocalidadDTO>();
-//			listaLocalidades = agenda.obtenerLocalidad();    
-			
-//			LocalidadDTO nombreLocalidad = listaLocalidades.get(idLocalidad);
+
 					
-			Object[] fila = {nombre, tel, calle, altura, piso, depto, "Pilar",email, fCumple};
+			Object[] fila = {idPersona, nombre, tel, calle, altura, piso, depto, nombreLocalidad,email, fCumple, nombreContacto};
 			this.getModelPersonas().addRow(fila);
 		}
 		
