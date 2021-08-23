@@ -13,6 +13,8 @@ public class PersonaDTO
 	private String fCumple;
 	private int idLocalidad;
 	private int idTipoContacto;
+	private String nombreLocalidad;
+	private String nombreContacto;
 
 	public PersonaDTO(int idPersona, String nombre, String telefono, String calle, int altura, int piso, String depto, String email, String fCumple, int idLocalidad, int idTipoContacto)
 	{
@@ -29,6 +31,45 @@ public class PersonaDTO
 		this.idTipoContacto = idTipoContacto;
 	}
 	
+	
+	public PersonaDTO(int idPersona, String nombre, String telefono, String calle, int altura, int piso, String depto, String email, String fCumple, String nombreLocalidad, String nombreContacto)
+	{
+		this.idPersona = idPersona;
+		this.nombre = nombre;
+		this.telefono = telefono;
+		this.calle = calle;
+		this.altura = altura;
+		this.piso = piso;
+		this.depto = depto;
+		this.email = email;
+		this.fCumple = fCumple;
+		this.nombreLocalidad = nombreLocalidad;
+		this.nombreContacto = nombreContacto;
+	}
+	
+	
+	
+	
+	public String getNombreLocalidad() {
+		return nombreLocalidad;
+	}
+
+
+	public void setNombreLocalidad(String nombreLocalidad) {
+		this.nombreLocalidad = nombreLocalidad;
+	}
+
+
+	public String getNombreContacto() {
+		return nombreContacto;
+	}
+
+
+	public void setNombreContacto(String nombreContacto) {
+		this.nombreContacto = nombreContacto;
+	}
+
+
 	public int getIdPersona() 
 	{
 		return this.idPersona;

@@ -11,16 +11,17 @@ import dto.TipoContactoDTO;
 import dto.PaisDTO;
 import dto.ProvinciaDTO;
 import dto.LocalidadDTO;
-import java.awt.Font;
 
-public class VentanaPersona extends JFrame 
+public class VentanaPersonaEditar extends JFrame 
 {
+	
+
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtNombre;
 	private JTextField txtTelefono;
 	private JButton btnAgregarPersona;
-	private static VentanaPersona INSTANCE;
+	private static VentanaPersonaEditar INSTANCE;
 	private JTextField txtEmail;
 	private JTextField txtCumpleaños;
 	private JTextField txtCalle;
@@ -35,18 +36,18 @@ public class VentanaPersona extends JFrame
 	
 	
 	
-	public static VentanaPersona getInstance()
+	public static VentanaPersonaEditar getInstance()
 	{
 		if(INSTANCE == null)
 		{
-			INSTANCE = new VentanaPersona(); 	
-			return new VentanaPersona();
+			INSTANCE = new VentanaPersonaEditar(); 	
+			return new VentanaPersonaEditar();
 		}
 		else
 			return INSTANCE;
 	}
 
-	private VentanaPersona() 
+	private VentanaPersonaEditar() 
 	{
 		super();
 		
@@ -80,7 +81,7 @@ public class VentanaPersona extends JFrame
 		lblNombreYApellido.setBounds(10, 11, 113, 14);
 		panel.add(lblNombreYApellido);
 		
-		JLabel lblNewLabel = new JLabel("Fecha de Cumpleaños");
+		JLabel lblNewLabel = new JLabel("Fecha de Nacimiento");
 		lblNewLabel.setBounds(10, 96, 113, 14);
 		panel.add(lblNewLabel);
 				
@@ -138,7 +139,7 @@ public class VentanaPersona extends JFrame
 		txtEmail.setColumns(10);
 		
 		txtCumpleaños = new JTextField();
-		txtCumpleaños.setBounds(129, 93, 81, 20);
+		txtCumpleaños.setBounds(114, 93, 81, 20);
 		panel.add(txtCumpleaños);
 		txtCumpleaños.setColumns(10);
 		
@@ -183,11 +184,6 @@ public class VentanaPersona extends JFrame
 		btnAgregarPersona = new JButton("Agregar");
 		btnAgregarPersona.setBounds(208, 374, 89, 23);
 		panel.add(btnAgregarPersona);
-		
-		JLabel lblNewLabel_1 = new JLabel("DD/MM");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel_1.setBounds(213, 96, 46, 14);
-		panel.add(lblNewLabel_1);
 		
 		
 		this.setVisible(false);
@@ -239,12 +235,6 @@ public class VentanaPersona extends JFrame
 		return txtCumpleaños;
 	}
 	
-
-	public JComboBox<TipoContactoDTO> getComboTipoContacto()
-	{
-		return comboTipoContacto;
-	}
-	
 	
 	public JComboBox<LocalidadDTO> getComboLocalidad()
 	{
@@ -274,4 +264,6 @@ public class VentanaPersona extends JFrame
 		this.txtTelefono.setText(null);
 		this.dispose();
 	}
+	
+	
 }

@@ -17,7 +17,11 @@ public class PersonaDAOSQL implements PersonaDAO
 	private static final String delete = "DELETE FROM personas WHERE idPersona = ?";
 	private static final String readall = "SELECT * FROM personas";
 	private static final String update = "UPDATE personas SET nombre = ?, telefono = ?, calle = ?, altura = ?, piso = ?, depto = ?, email = ?, fCumple =?. idTipoContacto = ?, idLocalidad = ? WHERE idPersona = ?";
-	
+	private static final String readallLoc= " SELECT idPersona, ap.Nombre, Telefono, calle, altura, piso, f_cumpleaños, email, depto, atip.nombre, al.nombre FROM agenda.personas ap\r\n"
+			+ " join   agenda.tipocontacto atip\r\n"
+			+ " on  ap.idTipoContacto = atip.id\r\n"
+			+ " join agenda.localidad al\r\n"
+			+ " on ap.idLocalidad = al.id;";
 	
 	public boolean insert(PersonaDTO persona)
 	{
@@ -89,7 +93,7 @@ public class PersonaDAOSQL implements PersonaDAO
 		Conexion conexion = Conexion.getConexion();
 		try 
 		{
-			statement = conexion.getSQLConexion().prepareStatement(readall);
+			statement = conexion.getSQLConexion().prepareStatement(readallLoc);
 			resultSet = statement.executeQuery();
 			while(resultSet.next())
 			{
@@ -114,12 +118,12 @@ public class PersonaDAOSQL implements PersonaDAO
 		String depto = resultSet.getString("Depto");
 		String email = resultSet.getString("email");
 		String fCumple = resultSet.getString("f_cumpleaños");
-		int idLocalidad = resultSet.getInt("idLocalidad");
-		int idTipoContacto = resultSet.getInt("idTipoContacto");
+		String nombreLocalidad = resultSet.getString("al.nombre");
+		String nombreTipoContacto = resultSet.getString("atip.nombre");
 		
 		
 		
-		return new PersonaDTO(id, nombre, tel, calle, altura, piso, depto, email, fCumple, idLocalidad, idTipoContacto);
+		return new PersonaDTO(id, nombre, tel, calle, altura, piso, depto, email, fCumple, nombreLocalidad, nombreTipoContacto);
 	}
 
 	public boolean update(PersonaDTO persona) {
