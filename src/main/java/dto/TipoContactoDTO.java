@@ -31,4 +31,9 @@ public class TipoContactoDTO
 		this.nombreTipoContacto = nombre;
 	}
 
+	@Override
+	public String toString() {
+		return  nombreTipoContacto ;
+	}
+
 }

@@ -2,6 +2,7 @@ package presentacion.vista;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -11,13 +12,19 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import dto.LocalidadDTO;
 import dto.PersonaDTO;
+import dto.ProvinciaDTO;
+import modelo.Agenda;
 
 import javax.swing.JButton;
 
 import persistencia.conexion.Conexion;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class Vista
 {
@@ -28,11 +35,13 @@ public class Vista
 	private JButton btnReporte;
 	private JButton btnNewContacto;
 	private DefaultTableModel modelPersonas;
-	private  String[] nombreColumnas = {"Nombre y apellido","Telefono"};
+	private  String[] nombreColumnas = {"Nombre y apellido","Telefono", "Calle", "Altura", "Piso", "Depto", "Localidad", "e-mail", "Cumpleaños"};
 	private JLabel lblGestion;
 	private JButton btnLocalidaABM;
 	private JButton btnProvinciaABM;
 	private JButton btnPaisABM;
+	
+	private Agenda agenda;
 
 	public Vista() 
 	{
@@ -44,17 +53,17 @@ public class Vista
 	private void initialize() 
 	{
 		frame = new JFrame();
-		frame.setBounds(100, 100, 809, 300);
+		frame.setBounds(100, 100, 678, 320);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 426, 262);
+		panel.setBounds(0, 0, 652, 224);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JScrollPane spPersonas = new JScrollPane();
-		spPersonas.setBounds(10, 11, 405, 182);
+		spPersonas.setBounds(10, 11, 642, 171);
 		panel.add(spPersonas);
 		
 		modelPersonas = new DefaultTableModel(null,nombreColumnas);
@@ -68,40 +77,41 @@ public class Vista
 		spPersonas.setViewportView(tablaPersonas);
 		
 		btnAgregar = new JButton("Agregar");
-		btnAgregar.setBounds(10, 228, 89, 23);
+		btnAgregar.setBounds(20, 193, 89, 23);
 		panel.add(btnAgregar);
 		
 		JButton btnEditar = new JButton("Editar");
-		btnEditar.setBounds(109, 228, 89, 23);
+		btnEditar.setBounds(119, 193, 89, 23);
 		panel.add(btnEditar);
 		
 		btnBorrar = new JButton("Borrar");
-		btnBorrar.setBounds(208, 228, 89, 23);
+		btnBorrar.setBounds(218, 193, 89, 23);
 		panel.add(btnBorrar);
 		
 		btnReporte = new JButton("Reporte");
-		btnReporte.setBounds(307, 228, 89, 23);
+		btnReporte.setBounds(317, 193, 89, 23);
 		panel.add(btnReporte);
 		
 		btnNewContacto = new JButton("ABM Tipo de Contacto");
-		btnNewContacto.setBounds(436, 40, 147, 23);
+		btnNewContacto.setBounds(23, 252, 147, 23);
 		frame.getContentPane().add(btnNewContacto);
 		
 		lblGestion = new JLabel("Gestión");
+		lblGestion.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblGestion.setHorizontalAlignment(SwingConstants.CENTER);
-		lblGestion.setBounds(436, 15, 347, 14);
+		lblGestion.setBounds(192, 235, 292, 14);
 		frame.getContentPane().add(lblGestion);
 		
 		btnLocalidaABM = new JButton("ABM Localida");
-		btnLocalidaABM.setBounds(436, 74, 147, 23);
+		btnLocalidaABM.setBounds(494, 252, 147, 23);
 		frame.getContentPane().add(btnLocalidaABM);
 		
 		btnProvinciaABM = new JButton("ABM Provincia");
-		btnProvinciaABM.setBounds(436, 108, 147, 23);
+		btnProvinciaABM.setBounds(337, 252, 147, 23);
 		frame.getContentPane().add(btnProvinciaABM);
 		
 		btnPaisABM = new JButton("ABM País");
-		btnPaisABM.setBounds(436, 142, 147, 23);
+		btnPaisABM.setBounds(180, 252, 147, 23);
 		frame.getContentPane().add(btnPaisABM);
 	}
 	
@@ -186,7 +196,20 @@ public class Vista
 		{
 			String nombre = p.getNombre();
 			String tel = p.getTelefono();
-			Object[] fila = {nombre, tel};
+			String calle = p.getCalle();
+			int altura= p.getAltura();
+			int piso = p.getPiso();
+			String depto = p.getDepto();
+			String email = p.getEmail();
+			String fCumple = p.getFCumple();
+			int idLocalidad = p.getIdLocalidad();
+							
+//			List<LocalidadDTO> listaLocalidades = new ArrayList<LocalidadDTO>();
+//			listaLocalidades = agenda.obtenerLocalidad();    
+			
+//			LocalidadDTO nombreLocalidad = listaLocalidades.get(idLocalidad);
+					
+			Object[] fila = {nombre, tel, calle, altura, piso, depto, "Pilar",email, fCumple};
 			this.getModelPersonas().addRow(fila);
 		}
 		

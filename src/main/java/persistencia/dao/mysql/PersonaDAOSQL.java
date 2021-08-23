@@ -13,10 +13,10 @@ import dto.PersonaDTO;
 
 public class PersonaDAOSQL implements PersonaDAO
 {
-	private static final String insert = "INSERT INTO personas(idPersona, nombre, telefono) VALUES(?, ?, ?)";
+	private static final String insert = "INSERT INTO personas(idPersona, nombre, telefono, calle, altura, piso, depto, email, f_cumpleaños, idTipoContacto, idLocalidad) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String delete = "DELETE FROM personas WHERE idPersona = ?";
 	private static final String readall = "SELECT * FROM personas";
-	private static final String update = "UPDATE personas SET nombre = ?, telefono = ? WHERE idPersona = ?";
+	private static final String update = "UPDATE personas SET nombre = ?, telefono = ?, calle = ?, altura = ?, piso = ?, depto = ?, email = ?, fCumple =?. idTipoContacto = ?, idLocalidad = ? WHERE idPersona = ?";
 	
 	
 	public boolean insert(PersonaDTO persona)
@@ -30,6 +30,16 @@ public class PersonaDAOSQL implements PersonaDAO
 			statement.setInt(1, persona.getIdPersona());
 			statement.setString(2, persona.getNombre());
 			statement.setString(3, persona.getTelefono());
+			
+			statement.setString(4, persona.getCalle());
+			statement.setInt(5, persona.getAltura());
+			statement.setInt(6, persona.getPiso());
+			statement.setString(7, persona.getDepto());
+			statement.setString(8, persona.getEmail());
+			statement.setString(9, persona.getFCumple());
+			statement.setInt(10, persona.getIdTipoContacto());
+			statement.setInt(11, persona.getIdLocalidad());
+			
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -98,7 +108,18 @@ public class PersonaDAOSQL implements PersonaDAO
 		int id = resultSet.getInt("idPersona");
 		String nombre = resultSet.getString("Nombre");
 		String tel = resultSet.getString("Telefono");
-		return new PersonaDTO(id, nombre, tel);
+		String calle = resultSet.getString("Calle");
+		int altura = resultSet.getInt("Altura");
+		int piso = resultSet.getInt("Piso");
+		String depto = resultSet.getString("Depto");
+		String email = resultSet.getString("email");
+		String fCumple = resultSet.getString("f_cumpleaños");
+		int idLocalidad = resultSet.getInt("idLocalidad");
+		int idTipoContacto = resultSet.getInt("idTipoContacto");
+		
+		
+		
+		return new PersonaDTO(id, nombre, tel, calle, altura, piso, depto, email, fCumple, idLocalidad, idTipoContacto);
 	}
 
 	public boolean update(PersonaDTO persona) {

@@ -47,6 +47,9 @@ public class Controlador implements ActionListener
 			//-- Persona
 			this.ventanaPersona = VentanaPersona.getInstance();
 			this.ventanaPersona.getBtnAgregarPersona().addActionListener(p->guardarPersona(p));
+			this.ventanaPersona.getComboPais().addActionListener(u->refreshProvinciaPersona(u));
+			this.ventanaPersona.getComboProvincia().addActionListener(z->refreshLocalidadPersona(z));
+			
 			this.agenda = agenda;
 			//-- Tipo de Contacto
 			this.vista.getBtnContacto().addActionListener(b->ventanaAgregarTipoContacto(b));
@@ -150,13 +153,73 @@ public class Controlador implements ActionListener
 		///--------- Persona
 		
 		private void ventanaAgregarPersona(ActionEvent a) {
+			
+			List<PaisDTO> listaPaises = new ArrayList<PaisDTO>();
+			listaPaises = agenda.obtenerPaises();
+			for (PaisDTO paisDTO : listaPaises) {
+				this.ventanaPersona.getComboPais().addItem(new PaisDTO(paisDTO.getIdPais(), paisDTO.getnombrePais()));
+			}	
+						
+			List<TipoContactoDTO> listaContactos = new ArrayList<TipoContactoDTO>();
+			listaContactos = agenda.obtenerTipoContactos();
+			for (TipoContactoDTO contactos : listaContactos) {
+				this.ventanaPersona.getComboTipoContacto().addItem(new TipoContactoDTO(contactos.getIdTipoContacto(), contactos.getnombreTipoContacto()));
+			}	
+													
 			this.ventanaPersona.mostrarVentana();
 		}
 
+	
+
+		private void refreshProvinciaPersona(ActionEvent u) {
+						
+			this.ventanaPersona.getComboProvincia().removeAllItems();
+			this.ventanaPersona.getComboLocalidad().removeAllItems();
+			
+			List<ProvinciaDTO> listaProvincias = new ArrayList<ProvinciaDTO>();
+			PaisDTO idPais = (PaisDTO) this.ventanaPersona.getComboPais().getSelectedItem();
+			listaProvincias = agenda.obtenerPrvsPais(idPais.getIdPais());	
+			for (ProvinciaDTO prv : listaProvincias) {
+				this.ventanaPersona.getComboProvincia().addItem(new ProvinciaDTO(prv.getIdProvincia(), prv.getnombreProvincia(), prv.getIdPais()));
+			}
+			
+
+		}
+		
+		
+		private void refreshLocalidadPersona(ActionEvent z) {
+						
+			this.ventanaPersona.getComboLocalidad().removeAllItems();
+				
+			List<LocalidadDTO> listaLocalidades = new ArrayList<LocalidadDTO>();
+			ProvinciaDTO idPrv = (ProvinciaDTO) this.ventanaPersona.getComboProvincia().getSelectedItem();		
+			listaLocalidades = agenda.obtenerLocalidadProv(idPrv.getIdProvincia());	
+			for (LocalidadDTO lcl : listaLocalidades) {
+				this.ventanaPersona.getComboLocalidad().addItem(new LocalidadDTO(lcl.getId(), lcl.getNombreLocalida(), lcl.getIdProvincia()));
+			}			
+								
+		}
+		
+		
 		private void guardarPersona(ActionEvent p) {
 			String nombre = this.ventanaPersona.getTxtNombre().getText();
 			String tel = ventanaPersona.getTxtTelefono().getText();
-			PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel);
+						
+			String calle = ventanaPersona.getTxtCalle().getText();
+			String altura = ventanaPersona.getTxtAltura().getText();
+			String piso = ventanaPersona.getTxtPiso().getText();
+			String depto = ventanaPersona.getTxtDepto().getText();
+			String email = ventanaPersona.getTxtEmail().getText();
+			String fCumple = ventanaPersona.getTxtCalle().getText();
+
+			
+			int alturaInt = Integer.parseInt(altura);
+			int pisoInt = Integer.parseInt(piso);
+			
+			LocalidadDTO idLocalidad = (LocalidadDTO) this.ventanaPersona.getComboLocalidad().getSelectedItem();
+			TipoContactoDTO idTipoContacto = (TipoContactoDTO) this.ventanaPersona.getComboTipoContacto().getSelectedItem();
+						
+			PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel, calle, alturaInt, pisoInt, depto, email, fCumple, idLocalidad.getId(), idTipoContacto.getIdTipoContacto());
 			this.agenda.agregarPersona(nuevaPersona);
 			this.refrescarTabla();
 			this.ventanaPersona.cerrar();

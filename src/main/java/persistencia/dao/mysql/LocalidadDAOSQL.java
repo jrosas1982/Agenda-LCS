@@ -25,6 +25,7 @@ public class LocalidadDAOSQL implements LocalidadDAO
 	private static final String readall = "SELECT * FROM localidad";
 	private static final String update = "UPDATE localidad SET nombre = ? WHERE id = ?";
 	private static final String readallbyidprov = "SELECT * FROM localidad WHERE idProvincia = ?";
+	private static final String readallbyidLoc = "SELECT * FROM localidad WHERE id = ?";
 
 	public boolean insert(LocalidadDTO localidad)
 	{
@@ -159,5 +160,33 @@ public class LocalidadDAOSQL implements LocalidadDAO
 		}
 		return localidades;
 	}
+	
+	
+	public List<LocalidadDTO>readAllByIdLocalidad(int idLocalidad) {
+		
+		PreparedStatement statement;
+		ResultSet resultSet; //Guarda el resultado de la query
+		ArrayList<LocalidadDTO> localidades = new ArrayList<LocalidadDTO>();
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(readallbyidLoc);
+			statement.setInt(1, idLocalidad);
+			resultSet = statement.executeQuery();
+			while(resultSet.next())
+			{
+				localidades.add(getLocalidadDTO(resultSet));
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return localidades;
+	}
+	
+	
+	
+	
 
 }
