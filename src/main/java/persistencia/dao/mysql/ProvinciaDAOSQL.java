@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import dto.ProvinciaDTO;
 import persistencia.conexion.Conexion;
 import persistencia.dao.interfaz.ProvinciaDAO;
-import dto.ProvinciaDTO;
 
 
 public class ProvinciaDAOSQL implements ProvinciaDAO
@@ -20,6 +20,7 @@ public class ProvinciaDAOSQL implements ProvinciaDAO
 	private static final String update = "UPDATE provincia SET nombre = ? , idPais = ? WHERE id = ?";
 	private static final String readallbyidpais = "SELECT * FROM provincia WHERE idPais = ?";
 
+	@Override
 	public boolean insert(ProvinciaDTO prv)
 	{
 		PreparedStatement statement;
@@ -36,8 +37,8 @@ public class ProvinciaDAOSQL implements ProvinciaDAO
 				conexion.commit();
 				isInsertExitoso = true;
 			}
-		} 
-		catch (SQLException e) 
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 			try {
@@ -46,16 +47,17 @@ public class ProvinciaDAOSQL implements ProvinciaDAO
 				e1.printStackTrace();
 			}
 		}
-		
+
 		return isInsertExitoso;
 	}
-	
+
+	@Override
 	public boolean delete(ProvinciaDTO prv_a_eliminar)
 	{
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isdeleteExitoso = false;
-		try 
+		try
 		{
 			statement = conexion.prepareStatement(delete);
 			statement.setString(1, Integer.toString(prv_a_eliminar.getIdProvincia()));
@@ -64,21 +66,22 @@ public class ProvinciaDAOSQL implements ProvinciaDAO
 				conexion.commit();
 				isdeleteExitoso = true;
 			}
-		} 
-		catch (SQLException e) 
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 		}
 		return isdeleteExitoso;
 	}
-	
+
+	@Override
 	public List<ProvinciaDTO> readAll()
 	{
 		PreparedStatement statement;
 		ResultSet resultSet; //Guarda el resultado de la query
-		ArrayList<ProvinciaDTO> prvs = new ArrayList<ProvinciaDTO>();
+		ArrayList<ProvinciaDTO> prvs = new ArrayList<>();
 		Conexion conexion = Conexion.getConexion();
-		try 
+		try
 		{
 			statement = conexion.getSQLConexion().prepareStatement(readall);
 			resultSet = statement.executeQuery();
@@ -86,14 +89,14 @@ public class ProvinciaDAOSQL implements ProvinciaDAO
 			{
 				prvs.add(getProvinciaDTO(resultSet));
 			}
-		} 
-		catch (SQLException e) 
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 		}
 		return prvs;
 	}
-	
+
 	private ProvinciaDTO getProvinciaDTO(ResultSet resultSet) throws SQLException
 	{
 		int id = resultSet.getInt("id");
@@ -102,6 +105,7 @@ public class ProvinciaDAOSQL implements ProvinciaDAO
 		return new ProvinciaDTO(id, nombre, idPais);
 	}
 
+	@Override
 	public boolean update(ProvinciaDTO prv) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -117,8 +121,8 @@ public class ProvinciaDAOSQL implements ProvinciaDAO
 				conexion.commit();
 				isUpdatedSuccess = true;
 			}
-		} 
-		catch (SQLException e) 
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 			try {
@@ -127,18 +131,18 @@ public class ProvinciaDAOSQL implements ProvinciaDAO
 				e1.printStackTrace();
 			}
 		}
-		
+
 		return isUpdatedSuccess;
 	}
 
 	@Override
 	public List<ProvinciaDTO> readAllById(int idPais) {
-		
+
 		PreparedStatement statement;
 		ResultSet resultSet; //Guarda el resultado de la query
-		ArrayList<ProvinciaDTO> prvs = new ArrayList<ProvinciaDTO>();
+		ArrayList<ProvinciaDTO> prvs = new ArrayList<>();
 		Conexion conexion = Conexion.getConexion();
-		try 
+		try
 		{
 			statement = conexion.getSQLConexion().prepareStatement(readallbyidpais);
 			statement.setInt(1, idPais);
@@ -147,8 +151,8 @@ public class ProvinciaDAOSQL implements ProvinciaDAO
 			{
 				prvs.add(getProvinciaDTO(resultSet));
 			}
-		} 
-		catch (SQLException e) 
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 		}

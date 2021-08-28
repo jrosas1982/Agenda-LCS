@@ -6,9 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.log4j.Logger;
-
 import dto.PersonaDTO;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -18,14 +16,14 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
-public class ReporteAgenda
+public class ReporteDominio
 {
 	private JasperReport reporte;
 	private JasperViewer reporteViewer;
 	private JasperPrint	reporteLleno;
 	private Logger log = Logger.getLogger(ReporteAgenda.class);
 	//Recibe la lista de personas para armar el reporte
-    public ReporteAgenda(List<PersonaDTO> personas)
+    public ReporteDominio(List<PersonaDTO> personas)
     {
     	//Hardcodeado
 		Map<String, Object> parametersMap = new HashMap<>();

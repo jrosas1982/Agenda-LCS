@@ -3,14 +3,15 @@ package persistencia.conexion;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
 import org.apache.log4j.Logger;
 
-public class Conexion 
+public class Conexion
 {
 	public static Conexion instancia;
 	private Connection connection;
-	private Logger log = Logger.getLogger(Conexion.class);	
-	
+	private Logger log = Logger.getLogger(Conexion.class);
+
 	private Conexion()
 	{
 		try
@@ -26,10 +27,10 @@ public class Conexion
 			log.error("Conexión fallida", e);
 		}
 	}
-	
-	
-	public static Conexion getConexion()   
-	{								
+
+
+	public static Conexion getConexion()
+	{
 		if(instancia == null)
 		{
 			instancia = new Conexion();
@@ -37,19 +38,19 @@ public class Conexion
 		return instancia;
 	}
 
-	public Connection getSQLConexion() 
+	public Connection getSQLConexion()
 	{
 		return this.connection;
 	}
-	
+
 	public void cerrarConexion()
 	{
-		try 
+		try
 		{
 			this.connection.close();
 			log.info("Conexion cerrada");
 		}
-		catch (SQLException e) 
+		catch (SQLException e)
 		{
 			log.error("Error al cerrar la conexión!", e);
 		}

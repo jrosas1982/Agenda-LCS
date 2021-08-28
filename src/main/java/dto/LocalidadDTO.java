@@ -2,13 +2,13 @@ package dto;
 
 public class LocalidadDTO {
 
-	private int id; 
+	private int id;
 	private String NombreLocalida;
 	private int idProvincia;
-	
+
 	public LocalidadDTO(int id, String NombreLocalida, int idProvincia) {
 
-		
+
 		this.id = id;
 		this.NombreLocalida = NombreLocalida;
 		this.idProvincia = idProvincia;

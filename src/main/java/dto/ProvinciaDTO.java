@@ -1,6 +1,6 @@
 package dto;
 
-public class ProvinciaDTO 
+public class ProvinciaDTO
 {
 	private int idProvincia;
 	private String nombreProvincia;
@@ -10,25 +10,25 @@ public class ProvinciaDTO
 	{
 		this.idProvincia = idProvincia;
 		this.nombreProvincia = nombreProvincia;
-		this.idPais = idPais;		
+		this.idPais = idPais;
 	}
-	
-	public int getIdProvincia() 
+
+	public int getIdProvincia()
 	{
 		return this.idProvincia;
 	}
 
-	public void setIdProvincia(int idProvincia) 
+	public void setIdProvincia(int idProvincia)
 	{
 		this.idProvincia = idProvincia;
 	}
 
-	public String getnombreProvincia() 
+	public String getnombreProvincia()
 	{
 		return this.nombreProvincia;
 	}
 
-	public void setNombreProvincia(String nombreProvincia) 
+	public void setNombreProvincia(String nombreProvincia)
 	{
 		this.nombreProvincia = nombreProvincia;
 	}

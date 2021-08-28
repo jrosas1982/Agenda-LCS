@@ -7,11 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import persistencia.conexion.Conexion;
-
-import persistencia.dao.interfaz.TipoContactoDAO;
-
 import dto.TipoContactoDTO;
+import persistencia.conexion.Conexion;
+import persistencia.dao.interfaz.TipoContactoDAO;
 
 public class TipoContactoDAOSQL implements TipoContactoDAO
 {
@@ -19,8 +17,9 @@ public class TipoContactoDAOSQL implements TipoContactoDAO
 	private static final String delete = "DELETE FROM tipocontacto WHERE id = ?";
 	private static final String readall = "SELECT * FROM tipocontacto";
 	private static final String update = "UPDATE tipocontacto SET nombre = ? WHERE id = ?";
-	
-	
+
+
+	@Override
 	public boolean insert(TipoContactoDTO tipoContacto)
 	{
 		PreparedStatement statement;
@@ -36,8 +35,8 @@ public class TipoContactoDAOSQL implements TipoContactoDAO
 				conexion.commit();
 				isInsertExitoso = true;
 			}
-		} 
-		catch (SQLException e) 
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 			try {
@@ -46,16 +45,17 @@ public class TipoContactoDAOSQL implements TipoContactoDAO
 				e1.printStackTrace();
 			}
 		}
-		
+
 		return isInsertExitoso;
 	}
-	
+
+	@Override
 	public boolean delete(TipoContactoDTO tipoContacto_a_eliminar)
 	{
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isdeleteExitoso = false;
-		try 
+		try
 		{
 			statement = conexion.prepareStatement(delete);
 			statement.setString(1, Integer.toString(tipoContacto_a_eliminar.getIdTipoContacto()));
@@ -64,21 +64,22 @@ public class TipoContactoDAOSQL implements TipoContactoDAO
 				conexion.commit();
 				isdeleteExitoso = true;
 			}
-		} 
-		catch (SQLException e) 
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 		}
 		return isdeleteExitoso;
 	}
-	
+
+	@Override
 	public List<TipoContactoDTO> readAll()
 	{
 		PreparedStatement statement;
 		ResultSet resultSet; //Guarda el resultado de la query
-		ArrayList<TipoContactoDTO> tipoContacto = new ArrayList<TipoContactoDTO>();
+		ArrayList<TipoContactoDTO> tipoContacto = new ArrayList<>();
 		Conexion conexion = Conexion.getConexion();
-		try 
+		try
 		{
 			statement = conexion.getSQLConexion().prepareStatement(readall);
 			resultSet = statement.executeQuery();
@@ -86,14 +87,14 @@ public class TipoContactoDAOSQL implements TipoContactoDAO
 			{
 				tipoContacto.add(getTipoContactoDTO(resultSet));
 			}
-		} 
-		catch (SQLException e) 
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 		}
 		return tipoContacto;
 	}
-	
+
 	private TipoContactoDTO getTipoContactoDTO(ResultSet resultSet) throws SQLException
 	{
 		int idTipoContacto = resultSet.getInt("id");
@@ -101,6 +102,7 @@ public class TipoContactoDAOSQL implements TipoContactoDAO
 		return new TipoContactoDTO(idTipoContacto, nombre);
 	}
 
+	@Override
 	public boolean update(TipoContactoDTO tipoContacto) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -115,8 +117,8 @@ public class TipoContactoDAOSQL implements TipoContactoDAO
 				conexion.commit();
 				isUpdatedSuccess = true;
 			}
-		} 
-		catch (SQLException e) 
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 			try {
@@ -125,7 +127,7 @@ public class TipoContactoDAOSQL implements TipoContactoDAO
 				e1.printStackTrace();
 			}
 		}
-		
+
 		return isUpdatedSuccess;
 	}
 }

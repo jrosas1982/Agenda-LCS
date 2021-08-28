@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import dto.PersonaDTO;
 import persistencia.conexion.Conexion;
 import persistencia.dao.interfaz.PersonaDAO;
-import dto.PersonaDTO;
 
 public class PersonaDAOSQL implements PersonaDAO
 {
@@ -28,9 +28,9 @@ public class PersonaDAOSQL implements PersonaDAO
 			+ " left join agenda.pais aps\r\n"
 			+ " on ap.idPais = aps.id"
 			+ " where idPersona = ?; ";
-			
 
-	
+
+
 	private static final String readallLoc= " SELECT idPersona, ap.Nombre, Telefono, calle, altura, piso, f_cumpleaños, email, depto, atip.nombre, al.nombre , apr.nombre , aps.nombre FROM agenda.personas ap\r\n"
 			+ "	 left join   agenda.tipocontacto atip\r\n"
 			+ "	 on  ap.idTipoContacto = atip.id\r\n"
@@ -41,8 +41,9 @@ public class PersonaDAOSQL implements PersonaDAO
 			+ "	 left join agenda.pais aps\r\n"
 			+ "	 on ap.idPais = aps.id;";
 
-	
-	
+
+
+	@Override
 	public boolean insert(PersonaDTO persona)
 	{
 		PreparedStatement statement;
@@ -54,7 +55,7 @@ public class PersonaDAOSQL implements PersonaDAO
 			statement.setInt(1, persona.getIdPersona());
 			statement.setString(2, persona.getNombre());
 			statement.setString(3, persona.getTelefono());
-			
+
 			statement.setString(4, persona.getCalle());
 			statement.setInt(5, persona.getAltura());
 			statement.setInt(6, persona.getPiso());
@@ -65,14 +66,14 @@ public class PersonaDAOSQL implements PersonaDAO
 			statement.setInt(11, persona.getIdLocalidad());
 			statement.setInt(12, persona.getIdProvincia());
 			statement.setInt(13, persona.getIdPais());
-			
+
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
 				isInsertExitoso = true;
 			}
-		} 
-		catch (SQLException e) 
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 			try {
@@ -81,16 +82,17 @@ public class PersonaDAOSQL implements PersonaDAO
 				e1.printStackTrace();
 			}
 		}
-		
+
 		return isInsertExitoso;
 	}
-	
+
+	@Override
 	public boolean delete(PersonaDTO persona_a_eliminar)
 	{
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isdeleteExitoso = false;
-		try 
+		try
 		{
 			statement = conexion.prepareStatement(delete);
 			statement.setString(1, Integer.toString(persona_a_eliminar.getIdPersona()));
@@ -99,21 +101,22 @@ public class PersonaDAOSQL implements PersonaDAO
 				conexion.commit();
 				isdeleteExitoso = true;
 			}
-		} 
-		catch (SQLException e) 
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 		}
 		return isdeleteExitoso;
 	}
-	
+
+	@Override
 	public List<PersonaDTO> readAll()
 	{
 		PreparedStatement statement;
 		ResultSet resultSet; //Guarda el resultado de la query
-		ArrayList<PersonaDTO> personas = new ArrayList<PersonaDTO>();
+		ArrayList<PersonaDTO> personas = new ArrayList<>();
 		Conexion conexion = Conexion.getConexion();
-		try 
+		try
 		{
 			statement = conexion.getSQLConexion().prepareStatement(readallLoc);
 			resultSet = statement.executeQuery();
@@ -121,14 +124,14 @@ public class PersonaDAOSQL implements PersonaDAO
 			{
 				personas.add(getPersonaDTO(resultSet));
 			}
-		} 
-		catch (SQLException e) 
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 		}
 		return personas;
 	}
-	
+
 	private PersonaDTO getPersonaDTO(ResultSet resultSet) throws SQLException
 	{
 		int id = resultSet.getInt("idPersona");
@@ -145,9 +148,10 @@ public class PersonaDAOSQL implements PersonaDAO
 		String nombreProvincia = resultSet.getString("apr.nombre");
 		String nombrePais = resultSet.getString("aps.nombre");
 		return new PersonaDTO(id, nombre, tel, calle, altura, piso, depto, email, fCumple, nombreLocalidad, nombreTipoContacto, nombreProvincia, nombrePais);
-	
+
 	}
 
+	@Override
 	public boolean update(PersonaDTO persona) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -168,14 +172,14 @@ public class PersonaDAOSQL implements PersonaDAO
 			statement.setInt(11, persona.getIdProvincia());
 			statement.setInt(12, persona.getIdPais());
 			statement.setInt(13, persona.getIdPersona());
-			
+
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
 				isUpdatedSuccess = true;
 			}
-		} 
-		catch (SQLException e) 
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 			try {
@@ -184,18 +188,18 @@ public class PersonaDAOSQL implements PersonaDAO
 				e1.printStackTrace();
 			}
 		}
-		
+
 		return isUpdatedSuccess;
 	}
 
 	@Override
 	public PersonaDTO geyById(int id) {
-		
+
 		PreparedStatement statement;
 		ResultSet resultSet; //Guarda el resultado de la query
-		ArrayList<PersonaDTO> personas = new ArrayList<PersonaDTO>();
+		ArrayList<PersonaDTO> personas = new ArrayList<>();
 		Conexion conexion = Conexion.getConexion();
-		try 
+		try
 		{
 			statement = conexion.getSQLConexion().prepareStatement(getById);
 			statement.setInt(1, id);
@@ -204,11 +208,12 @@ public class PersonaDAOSQL implements PersonaDAO
 			{
 				personas.add(getPersonaDTO(resultSet));
 			}
-		} 
-		catch (SQLException e) 
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 		}
 		return personas.get(0);
 	}
+	
 }

@@ -7,16 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import dto.LocalidadDTO;
 import persistencia.conexion.Conexion;
 import persistencia.dao.interfaz.LocalidadDAO;
-import persistencia.dao.interfaz.PaisDAO;
-import persistencia.dao.interfaz.PersonaDAO;
-import persistencia.dao.interfaz.TipoContactoDAO;
-import dto.LocalidadDTO;
-import dto.PaisDTO;
-import dto.PersonaDTO;
-import dto.ProvinciaDTO;
-import dto.TipoContactoDTO;
 
 public class LocalidadDAOSQL implements LocalidadDAO
 {
@@ -27,6 +20,7 @@ public class LocalidadDAOSQL implements LocalidadDAO
 	private static final String readallbyidprov = "SELECT * FROM localidad WHERE idProvincia = ?";
 	private static final String readallbyidLoc = "SELECT * FROM localidad WHERE id = ?";
 
+	@Override
 	public boolean insert(LocalidadDTO localidad)
 	{
 		PreparedStatement statement;
@@ -43,8 +37,8 @@ public class LocalidadDAOSQL implements LocalidadDAO
 				conexion.commit();
 				isInsertExitoso = true;
 			}
-		} 
-		catch (SQLException e) 
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 			try {
@@ -53,16 +47,17 @@ public class LocalidadDAOSQL implements LocalidadDAO
 				e1.printStackTrace();
 			}
 		}
-		
+
 		return isInsertExitoso;
 	}
-	
+
+	@Override
 	public boolean delete(LocalidadDTO localidad_a_eliminar)
 	{
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isdeleteExitoso = false;
-		try 
+		try
 		{
 			statement = conexion.prepareStatement(delete);
 			statement.setString(1, Integer.toString(localidad_a_eliminar.getId()));
@@ -71,21 +66,22 @@ public class LocalidadDAOSQL implements LocalidadDAO
 				conexion.commit();
 				isdeleteExitoso = true;
 			}
-		} 
-		catch (SQLException e) 
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 		}
 		return isdeleteExitoso;
 	}
-	
+
+	@Override
 	public List<LocalidadDTO> readAll()
 	{
 		PreparedStatement statement;
 		ResultSet resultSet; //Guarda el resultado de la query
-		ArrayList<LocalidadDTO> localidades = new ArrayList<LocalidadDTO>();
+		ArrayList<LocalidadDTO> localidades = new ArrayList<>();
 		Conexion conexion = Conexion.getConexion();
-		try 
+		try
 		{
 			statement = conexion.getSQLConexion().prepareStatement(readall);
 			resultSet = statement.executeQuery();
@@ -93,14 +89,14 @@ public class LocalidadDAOSQL implements LocalidadDAO
 			{
 				localidades.add(getLocalidadDTO(resultSet));
 			}
-		} 
-		catch (SQLException e) 
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 		}
 		return localidades;
 	}
-	
+
 	private LocalidadDTO getLocalidadDTO(ResultSet resultSet) throws SQLException
 	{
 		int id = resultSet.getInt("id");
@@ -109,6 +105,7 @@ public class LocalidadDAOSQL implements LocalidadDAO
 		return new LocalidadDTO(id, nombre,idProvincia);
 	}
 
+	@Override
 	public boolean update(LocalidadDTO localidad) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -123,8 +120,8 @@ public class LocalidadDAOSQL implements LocalidadDAO
 				conexion.commit();
 				isUpdatedSuccess = true;
 			}
-		} 
-		catch (SQLException e) 
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 			try {
@@ -133,18 +130,18 @@ public class LocalidadDAOSQL implements LocalidadDAO
 				e1.printStackTrace();
 			}
 		}
-		
+
 		return isUpdatedSuccess;
 	}
 
 	@Override
 	public List<LocalidadDTO>readAllById(int idProvincia) {
-		
+
 		PreparedStatement statement;
 		ResultSet resultSet; //Guarda el resultado de la query
-		ArrayList<LocalidadDTO> localidades = new ArrayList<LocalidadDTO>();
+		ArrayList<LocalidadDTO> localidades = new ArrayList<>();
 		Conexion conexion = Conexion.getConexion();
-		try 
+		try
 		{
 			statement = conexion.getSQLConexion().prepareStatement(readallbyidprov);
 			statement.setInt(1, idProvincia);
@@ -153,22 +150,22 @@ public class LocalidadDAOSQL implements LocalidadDAO
 			{
 				localidades.add(getLocalidadDTO(resultSet));
 			}
-		} 
-		catch (SQLException e) 
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 		}
 		return localidades;
 	}
-	
-	
+
+
 	public List<LocalidadDTO>readAllByIdLocalidad(int idLocalidad) {
-		
+
 		PreparedStatement statement;
 		ResultSet resultSet; //Guarda el resultado de la query
-		ArrayList<LocalidadDTO> localidades = new ArrayList<LocalidadDTO>();
+		ArrayList<LocalidadDTO> localidades = new ArrayList<>();
 		Conexion conexion = Conexion.getConexion();
-		try 
+		try
 		{
 			statement = conexion.getSQLConexion().prepareStatement(readallbyidLoc);
 			statement.setInt(1, idLocalidad);
@@ -177,16 +174,16 @@ public class LocalidadDAOSQL implements LocalidadDAO
 			{
 				localidades.add(getLocalidadDTO(resultSet));
 			}
-		} 
-		catch (SQLException e) 
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 		}
 		return localidades;
 	}
-	
-	
-	
-	
+
+
+
+
 
 }

@@ -7,8 +7,8 @@ public class DomicilioDTO {
 	private int piso;
 	private String depto;
 	private LocalidadDTO localidad;
-	
-	
+
+
 	public DomicilioDTO(int altura, String calle, int piso, String depto, LocalidadDTO localidad) {
 
 		this.altura = altura;
@@ -78,6 +78,6 @@ public class DomicilioDTO {
 		this.localidad = localidad;
 	}
 
-	
+
 }
 

@@ -1,6 +1,6 @@
 package dto;
 
-public class PaisDTO 
+public class PaisDTO
 {
 	private int idPais;
 	private String nombrePais;
@@ -10,23 +10,23 @@ public class PaisDTO
 		this.idPais = idPais;
 		this.nombrePais = nombrePais;
 	}
-	
-	public int getIdPais() 
+
+	public int getIdPais()
 	{
 		return this.idPais;
 	}
 
-	public void setIdPais(int idPais) 
+	public void setIdPais(int idPais)
 	{
 		this.idPais = idPais;
 	}
 
-	public String getnombrePais() 
+	public String getnombrePais()
 	{
 		return this.nombrePais;
 	}
 
-	public void setNombrePais(String nombrePais) 
+	public void setNombrePais(String nombrePais)
 	{
 		this.nombrePais = nombrePais;
 	}
@@ -35,6 +35,6 @@ public class PaisDTO
 	public String toString() {
 		return  nombrePais;
 	}
-	
+
 
 }
