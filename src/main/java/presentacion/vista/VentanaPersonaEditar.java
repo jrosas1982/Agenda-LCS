@@ -216,7 +216,11 @@ public class VentanaPersonaEditar extends JFrame
 		textFieldLTuristico.setColumns(10);
 		textFieldLTuristico.setBounds(139, 268, 159, 20);
 		panel.add(textFieldLTuristico);
-
+		
+		text_ID = new JTextField();
+		text_ID.setBounds(10, 378, 86, 20);
+		text_ID.setVisible(false);
+		panel.add(text_ID);
 
 		this.setVisible(false);
 	}

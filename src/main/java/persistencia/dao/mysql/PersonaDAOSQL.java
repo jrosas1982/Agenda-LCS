@@ -174,8 +174,9 @@ public class PersonaDAOSQL implements PersonaDAO
 			statement.setInt(10, persona.getIdLocalidad());
 			statement.setInt(11, persona.getIdProvincia());
 			statement.setInt(12, persona.getIdPais());
-			statement.setInt(13, persona.getIdPersona());
-			statement.setString(14, persona.getLugarTuristico());
+			statement.setString(13, persona.getLugarTuristico());
+			statement.setInt(14, persona.getIdPersona());
+			
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
