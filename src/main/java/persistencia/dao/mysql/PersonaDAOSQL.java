@@ -150,7 +150,10 @@ public class PersonaDAOSQL implements PersonaDAO
 		String nombrePais = resultSet.getString("aps.nombre");
 		String lugatT = resultSet.getString("lugarTur");
 		
-		PersonaDTO retPersona =  new PersonaDTO(id, nombre, tel, calle, altura, piso, depto, email, fCumple, nombreLocalidad, nombreTipoContacto, nombreProvincia, nombrePais, lugatT);
+		//PersonaDTO retPersona =  new PersonaDTO(id, nombre, tel, calle, altura, piso, depto, email, fCumple, nombreLocalidad, nombreTipoContacto, nombreProvincia, nombrePais, lugatT);
+
+		PersonaDTO retPersona =  new PersonaDTO(id, nombre, tel, calle, altura, piso, depto, email, fCumple, nombreLocalidad, nombreTipoContacto, nombreProvincia, nombrePais);
+		retPersona.setLugarTuristico(lugatT);
 		return retPersona;
 	}
 

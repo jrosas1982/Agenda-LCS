@@ -67,9 +67,9 @@ public class Agenda
 		this.tipoContacto.insert(nuevoTipoContacto);
 	}
 
-	public void borrarTipoContacto(TipoContactoDTO persona_a_eliminar)
+	public void borrarTipoContacto(TipoContactoDTO TipoContacto_a_eliminar)
 	{
-		this.tipoContacto.delete(persona_a_eliminar);
+		this.tipoContacto.delete(TipoContacto_a_eliminar);
 	}
 
 	public void editarTipoContacto(TipoContactoDTO persona_a_editar)

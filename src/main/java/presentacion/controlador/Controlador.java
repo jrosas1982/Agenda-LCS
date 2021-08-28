@@ -31,6 +31,7 @@ public class Controlador implements ActionListener
 		private VentanaLocalidad ventanaLocalidad;
 		private VentanaPais ventanaPais;
 		private VentanaPersonaEditar  ventanaPersonaEditar;
+		private List<TipoContactoDTO> contactoTabla;
 
 		private Agenda agenda;
 
@@ -53,6 +54,9 @@ public class Controlador implements ActionListener
 			this.vista.getBtnContacto().addActionListener(b->ventanaAgregarTipoContacto(b));
 			this.ventanaTipoContacto = VentanaTipoContacto.getInstance();
 			this.ventanaTipoContacto.getBtnAgregarTipoContacto().addActionListener(c->guardarTipoContacto(c));
+			this.ventanaTipoContacto.getBtnBorrar().addActionListener(c->borrarTipoContacto(c));
+
+			
 			//-- Tipo de Pais
 			this.vista.getBtnPaisABM().addActionListener(d->ventanaAgregarPais(d));
 			this.ventanaPais = VentanaPais.getInstance();
@@ -152,11 +156,16 @@ public class Controlador implements ActionListener
 
 		private void guardarTipoContacto(ActionEvent c) {
 			String nombreTipoContacto = this.ventanaTipoContacto.getTxtNombreContacto().getText();
-			TipoContactoDTO nuevoTipoContacto = new TipoContactoDTO(0, nombreTipoContacto);
-			this.agenda.agregarTipoContacto(nuevoTipoContacto);
-			this.refrescarTabla();
-			this.ventanaTipoContacto.cerrar();
+			if(nombreTipoContacto.length() != 0 )
+			{
+				TipoContactoDTO nuevoTipoContacto = new TipoContactoDTO(0, nombreTipoContacto);
+				this.agenda.agregarTipoContacto(nuevoTipoContacto);
+			}
+			this.ventanaTipoContacto.getTxtNombreContacto().setText("");
+			this.refrescarTablaContacto();
 		}
+		
+
 
 		///--------- Persona
 
@@ -182,8 +191,6 @@ public class Controlador implements ActionListener
 		this.ventanaPersona.mostrarVentana();
 		}
 
-
-
 		private void refreshProvinciaPersona(ActionEvent u) {
 
 			this.ventanaPersona.getComboProvincia().removeAllItems();
@@ -204,6 +211,7 @@ public class Controlador implements ActionListener
 			// TODO: handle exception
 		}
 		}
+		
 		private void refreshProvinciaPersonaEditar(ActionEvent u) {
 
 			this.ventanaPersonaEditar.getComboProvincia().removeAllItems();
@@ -244,6 +252,7 @@ public class Controlador implements ActionListener
 		}
 
 		}
+		
 		private void refreshLocalidadPersonaEditar(ActionEvent z) {
 
 			this.ventanaPersonaEditar.getComboLocalidad().removeAllItems();
@@ -262,7 +271,6 @@ public class Controlador implements ActionListener
 		}
 
 		}
-
 
 		private void guardarPersona(ActionEvent p) {
 			String nombre = this.ventanaPersona.getTxtNombre().getText();
@@ -303,15 +311,13 @@ public class Controlador implements ActionListener
 			{
 				this.agenda.borrarPersona(this.personasEnTabla.get(fila));
 			}
-
 			this.refrescarTabla();
 		}
-
-
 
 		public void inicializar()
 		{
 			this.refrescarTabla();
+			this.refrescarTablaContacto();
 			this.vista.show();
 		}
 		private void refrescarCombos()
@@ -324,6 +330,7 @@ public class Controlador implements ActionListener
 			this.ventanaPersonaEditar.getComboPais().removeAllItems();
 
 		}
+	
 		private void refrescarTabla()
 		{
 			this.personasEnTabla = agenda.obtenerPersonas();
@@ -412,7 +419,22 @@ public class Controlador implements ActionListener
 			this.refrescarTabla();
 			this.ventanaPersonaEditar.cerrar();
 		}
+		
 
-
+		private void refrescarTablaContacto()
+		{
+			this.contactoTabla = agenda.obtenerTipoContactos();
+			this.ventanaTipoContacto.llenarTabla(contactoTabla);
+		}
+		
+		public void borrarTipoContacto(ActionEvent s)
+		{
+			int[] filasSeleccionadas = this.ventanaTipoContacto.getTable().getSelectedRows();
+			for (int fila : filasSeleccionadas)
+			{
+				this.agenda.borrarTipoContacto(this.contactoTabla.get(fila));
+			}
+			this.refrescarTablaContacto();
+		}
 
 }

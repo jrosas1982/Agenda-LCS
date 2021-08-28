@@ -22,6 +22,7 @@ public class PersonaDTO
 	private String nombreProvincia;
 	private String nombrePais;
 	private String LugarTuristico;
+	private String dominioEmail;
 	
 //	refactor
 //	private DomicilioDTO domicilio;
@@ -96,7 +97,23 @@ public class PersonaDTO
 		this.nombrePais = nombrePais;
 		this.LugarTuristico = LugarTuristico;
 	}
-	
+	public PersonaDTO(int idPersona, String nombre, String telefono, String calle, int altura, int piso, String depto, String email, String fCumple, String nombreLocalidad, String nombreContacto , String nombreProvincia , String nombrePais)
+	{
+		this.idPersona = idPersona;
+		this.nombre = nombre;
+		this.telefono = telefono;
+		this.calle = calle;
+		this.altura = altura;
+		this.piso = piso;
+		this.depto = depto;
+		this.email = email;
+		this.fCumple = fCumple;
+		this.nombreLocalidad = nombreLocalidad;
+		this.nombreContacto = nombreContacto;
+		this.nombreProvincia = nombreProvincia;
+		this.nombrePais = nombrePais;
+		this.LugarTuristico = LugarTuristico;
+	}
 
 	public PersonaDTO() {
 
