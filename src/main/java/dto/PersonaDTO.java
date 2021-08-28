@@ -22,9 +22,46 @@ public class PersonaDTO
 	private String nombreProvincia;
 	private String nombrePais;
 	private String LugarTuristico;
-
-
-
+	
+//	refactor
+//	private DomicilioDTO domicilio;
+//
+//
+//	public PersonaDTO(int idPersona, String nombre, String telefono, DomicilioDTO domicilio, String email, String fCumple)
+//	{
+//		this.idPersona = idPersona;
+//		this.nombre = nombre;
+//		this.telefono = telefono;
+//		this.calle = calle;
+//		this.altura = altura;
+//		this.piso = piso;
+//		this.depto = depto;
+//		this.email = email;
+//		this.fCumple = fCumple;
+//		this.nombreLocalidad = nombreLocalidad;
+//		this.nombreContacto = nombreContacto;
+//		this.nombreProvincia = nombreProvincia;
+//		this.nombrePais = nombrePais;
+//	}
+	
+	
+	public PersonaDTO(int idPersona, String nombre, String telefono, String calle, int altura, int piso, String depto, String email, String fCumple, int idLocalidad, int idTipoContacto , int idProvincia , int idPais, String LugarTuristico)
+	{
+		this.idPersona = idPersona;
+		this.nombre = nombre;
+		this.telefono = telefono;
+		this.calle = calle;
+		this.altura = altura;
+		this.piso = piso;
+		this.depto = depto;
+		this.email = email;
+		this.fCumple = fCumple;
+		this.idLocalidad = idLocalidad;
+		this.idTipoContacto = idTipoContacto;
+		this.idProvincia = idProvincia;
+		this.LugarTuristico = LugarTuristico;
+	}
+	
 	public PersonaDTO(int idPersona, String nombre, String telefono, String calle, int altura, int piso, String depto, String email, String fCumple, int idLocalidad, int idTipoContacto , int idProvincia , int idPais)
 	{
 		this.idPersona = idPersona;
@@ -42,7 +79,7 @@ public class PersonaDTO
 	}
 
 
-	public PersonaDTO(int idPersona, String nombre, String telefono, String calle, int altura, int piso, String depto, String email, String fCumple, String nombreLocalidad, String nombreContacto , String nombreProvincia , String nombrePais)
+	public PersonaDTO(int idPersona, String nombre, String telefono, String calle, int altura, int piso, String depto, String email, String fCumple, String nombreLocalidad, String nombreContacto , String nombreProvincia , String nombrePais, String LugarTuristico)
 	{
 		this.idPersona = idPersona;
 		this.nombre = nombre;
@@ -57,7 +94,9 @@ public class PersonaDTO
 		this.nombreContacto = nombreContacto;
 		this.nombreProvincia = nombreProvincia;
 		this.nombrePais = nombrePais;
+		this.LugarTuristico = LugarTuristico;
 	}
+	
 
 	public PersonaDTO() {
 

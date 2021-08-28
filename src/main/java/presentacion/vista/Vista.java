@@ -29,7 +29,7 @@ public class Vista
 	private JButton btnReporte;
 	private JButton btnNewContacto;
 	private DefaultTableModel modelPersonas;
-	private  String[] nombreColumnas = {"ID", "Nombre y apellido","Telefono", "Calle", "Altura", "Piso", "Depto", "Localidad", "e-mail", "Cumpleaños", "Tipo Contacto"};
+	private  String[] nombreColumnas = {"ID", "Nombre y apellido","Telefono", "Calle", "Altura", "Piso", "Depto", "Localidad", "e-mail", "Cumpleaños", "Tipo Contacto", "lugarTur"};
 	private JLabel lblGestion;
 	private JButton btnLocalidaABM;
 	private JButton btnProvinciaABM;
@@ -204,10 +204,10 @@ public class Vista
 			String fCumple = p.getFCumple();
 			String nombreLocalidad = p.getNombreLocalidad();
 			String nombreContacto = p.getNombreContacto();
+			String lugarT = p.getLugarTuristico();
 
 
-
-			Object[] fila = {idPersona, nombre, tel, calle, altura, piso, depto, nombreLocalidad,email, fCumple, nombreContacto};
+			Object[] fila = {idPersona, nombre, tel, calle, altura, piso, depto, nombreLocalidad,email, fCumple, nombreContacto, lugarT};
 			this.getModelPersonas().addRow(fila);
 		}
 

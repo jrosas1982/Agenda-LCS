@@ -13,6 +13,7 @@ public class LocalidadDTO {
 		this.NombreLocalida = NombreLocalida;
 		this.idProvincia = idProvincia;
 	}
+	
 	public int getId() {
 		return id;
 	}

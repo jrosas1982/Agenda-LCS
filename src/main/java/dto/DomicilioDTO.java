@@ -7,15 +7,29 @@ public class DomicilioDTO {
 	private int piso;
 	private String depto;
 	private LocalidadDTO localidad;
+	//Refactor
+//	private ProvinciaDTO provincia;
+//	private PaisDTO pais;
 
-
+//	
+//	public DomicilioDTO(int altura, String calle, int piso, String depto, LocalidadDTO localidad , ProvinciaDTO provincia , PaisDTO pais ) {
+//
+//		this.altura = altura;
+//		this.calle = calle;
+//		this.piso = piso;
+//		this.depto = depto;
+//		this.localidad = localidad;
+//		this.provincia = provincia;
+//		this.pais = pais;
+//	}
+	
 	public DomicilioDTO(int altura, String calle, int piso, String depto, LocalidadDTO localidad) {
 
 		this.altura = altura;
 		this.calle = calle;
 		this.piso = piso;
 		this.depto = depto;
-		this.localidad = localidad;
+		this.localidad = localidad;	
 	}
 
 
