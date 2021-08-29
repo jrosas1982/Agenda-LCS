@@ -46,7 +46,7 @@ public class PersonaDTO
 //	}
 	
 	
-	public PersonaDTO(int idPersona, String nombre, String telefono, String calle, int altura, int piso, String depto, String email, String fCumple, int idLocalidad, int idTipoContacto , int idProvincia , int idPais, String LugarTuristico)
+	public PersonaDTO(int idPersona, String nombre, String telefono, String calle, int altura, int piso, String depto, String email, String fCumple, int idLocalidad, int idTipoContacto , int idProvincia , int idPais, String LugarTuristico, String dominioEmail)
 	{
 		this.idPersona = idPersona;
 		this.nombre = nombre;
@@ -61,6 +61,7 @@ public class PersonaDTO
 		this.idTipoContacto = idTipoContacto;
 		this.idProvincia = idProvincia;
 		this.LugarTuristico = LugarTuristico;
+		this.dominioEmail = dominioEmail;
 	}
 	
 	public PersonaDTO(int idPersona, String nombre, String telefono, String calle, int altura, int piso, String depto, String email, String fCumple, int idLocalidad, int idTipoContacto , int idProvincia , int idPais)
@@ -80,7 +81,7 @@ public class PersonaDTO
 	}
 
 
-	public PersonaDTO(int idPersona, String nombre, String telefono, String calle, int altura, int piso, String depto, String email, String fCumple, String nombreLocalidad, String nombreContacto , String nombreProvincia , String nombrePais, String LugarTuristico)
+	public PersonaDTO(int idPersona, String nombre, String telefono, String calle, int altura, int piso, String depto, String email, String fCumple, String nombreLocalidad, String nombreContacto , String nombreProvincia , String nombrePais, String LugarTuristico, String dominioEmail)
 	{
 		this.idPersona = idPersona;
 		this.nombre = nombre;
@@ -96,6 +97,8 @@ public class PersonaDTO
 		this.nombreProvincia = nombreProvincia;
 		this.nombrePais = nombrePais;
 		this.LugarTuristico = LugarTuristico;
+		this.dominioEmail = dominioEmail;
+		
 	}
 	public PersonaDTO(int idPersona, String nombre, String telefono, String calle, int altura, int piso, String depto, String email, String fCumple, String nombreLocalidad, String nombreContacto , String nombreProvincia , String nombrePais)
 	{
@@ -301,6 +304,14 @@ public class PersonaDTO
 
 	public void setLugarTuristico(String lugarTuristico) {
 		LugarTuristico = lugarTuristico;
+	}
+
+	public String getDominioEmail() {
+		return dominioEmail;
+	}
+
+	public void setDominioEmail(String dominioEmail) {
+		this.dominioEmail = dominioEmail;
 	}
 
 

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteDominio" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="821f9646-38ad-4001-b023-fb779c30f447">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<queryString language="SQL">
+		<![CDATA[SELECT count(dominiomail) , Nombre,
+	lugarTur,
+	dominioMail
+FROM personas order by dominiomail]]>
+	</queryString>
+	<field name="Nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="Nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="personas"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="lugarTur" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="lugarTur"/>
+		<property name="com.jaspersoft.studio.field.label" value="lugarTur"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="personas"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dominioMail" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="dominioMail"/>
+		<property name="com.jaspersoft.studio.field.label" value="dominioMail"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="personas"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="dominioMail1" class="java.lang.Integer" resetType="Group" resetGroup="Dominio" calculation="Count">
+		<variableExpression><![CDATA[$F{dominioMail}]]></variableExpression>
+	</variable>
+	<variable name="dominioMail2" class="java.lang.Integer" resetType="Column" calculation="Count">
+		<variableExpression><![CDATA[$F{dominioMail}]]></variableExpression>
+	</variable>
+	<variable name="dominioMail3" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{dominioMail}]]></variableExpression>
+	</variable>
+	<group name="Dominio">
+		<groupExpression><![CDATA[$F{dominioMail}]]></groupExpression>
+		<groupHeader>
+			<band height="39">
+				<textField>
+					<reportElement x="10" y="0" width="100" height="18" uuid="4cb219d4-8be1-43d8-b5b9-444123b8efea"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dominioMail}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="42" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="550" height="40" uuid="7934f69f-e4f9-40dd-ad9b-84a3167bfbe1"/>
+				<staticText>
+					<reportElement x="0" y="10" width="170" height="30" uuid="584e12da-8619-4e58-81ba-f57d562cc103"/>
+					<textElement>
+						<font size="18"/>
+					</textElement>
+					<text><![CDATA[Reporte de personas]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="31" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="4" width="550" height="24" uuid="266caed9-4b77-4b31-8d36-7db5113573ad"/>
+				<staticText>
+					<reportElement x="3" y="2" width="160" height="20" uuid="2a47f7d3-6778-4f34-8589-b4dd397f4745"/>
+					<text><![CDATA[Reporte para el ejemplo Agenda]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<frame>
+				<reportElement x="2" y="6" width="550" height="23" uuid="aeecddee-c561-44f9-9359-8a0f0e0a7108"/>
+				<staticText>
+					<reportElement x="50" y="0" width="180" height="21" uuid="3033f93d-9d8a-4bf7-91e4-86e42d48abc5"/>
+					<textElement textAlignment="Center">
+						<font size="14"/>
+					</textElement>
+					<text><![CDATA[Nombre y apellido]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="264" y="0" width="120" height="20" uuid="e596cc63-1f33-430b-9cd9-6a8d6ae814a5"/>
+					<textElement textAlignment="Center">
+						<font size="14"/>
+					</textElement>
+					<text><![CDATA[Lugar Turistico]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="32" splitType="Stretch">
+			<textField>
+				<reportElement x="280" y="10" width="111" height="21" uuid="66c90180-e778-4522-9231-30c1720fa032"/>
+				<textFieldExpression><![CDATA[$F{lugarTur}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="84" y="13" width="100" height="18" uuid="18713100-7de3-4593-8623-5bad1c71a283"/>
+				<textFieldExpression><![CDATA[$F{Nombre}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="13" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="305" splitType="Stretch">
+			<pieChart>
+				<chart evaluationTime="Report">
+					<reportElement x="184" y="52" width="200" height="200" uuid="f7c25206-7068-4f6d-a47d-00f589cf4cfb"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<dataset resetType="Report"/>
+					<keyExpression><![CDATA[$V$F{dominioMail}]]></keyExpression>
+					<valueExpression><![CDATA[$V{Dominio_COUNT}]]></valueExpression>
+					<labelExpression><![CDATA[$F{dominioMail}]]></labelExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+		</band>
+	</summary>
+</jasperReport>

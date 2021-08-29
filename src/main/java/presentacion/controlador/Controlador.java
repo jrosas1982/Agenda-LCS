@@ -284,7 +284,8 @@ public class Controlador implements ActionListener
 			String fCumple = ventanaPersona.getTxtFCumple().getText();
 			String lugarTuristico = this.ventanaPersona.getTextFieldLTuristico().getText();
 
-
+			String dominioEmail = getDominio(email);
+			
 			int alturaInt = Integer.parseInt(altura);
 			int pisoInt = Integer.parseInt(piso);
 
@@ -293,7 +294,7 @@ public class Controlador implements ActionListener
 			ProvinciaDTO idProvincia = (ProvinciaDTO) this.ventanaPersona.getComboProvincia().getSelectedItem();
 
 
-			PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel, calle, alturaInt, pisoInt, depto, email, fCumple, idLocalidad.getId(), idTipoContacto.getIdTipoContacto(), idProvincia.getIdProvincia(), idProvincia.getIdPais() , lugarTuristico );
+			PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel, calle, alturaInt, pisoInt, depto, email, fCumple, idLocalidad.getId(), idTipoContacto.getIdTipoContacto(), idProvincia.getIdProvincia(), idProvincia.getIdPais() , lugarTuristico , dominioEmail );
 			this.agenda.agregarPersona(nuevaPersona);
 			this.refrescarTabla();
 			this.ventanaPersona.cerrar();
@@ -387,6 +388,10 @@ public class Controlador implements ActionListener
 			this.ventanaPersonaEditar.mostrarVentana();
 
 		}
+		public String getDominio (String email) {
+			return "hotmail.com";
+			
+		}
 		public void guardarEditarPersona(ActionEvent t)
 		{
 			try {
@@ -402,12 +407,14 @@ public class Controlador implements ActionListener
 			int pisoInt = Integer.parseInt(this.ventanaPersonaEditar.getTxtPiso().getText());
 			String lugarTuristico = this.ventanaPersonaEditar.getTextFieldLTuristico().getText();
 			
+			String dominioEmail = getDominio(email);
+			
 			TipoContactoDTO idTipoContacto = (TipoContactoDTO) this.ventanaPersonaEditar.getComboTipoContacto().getSelectedItem();
 
 			LocalidadDTO idlocalida = (LocalidadDTO) this.ventanaPersonaEditar.getComboLocalidad().getSelectedItem();
 			ProvinciaDTO idProv = (ProvinciaDTO) this.ventanaPersonaEditar.getComboProvincia().getSelectedItem();
 			PaisDTO idPais = (PaisDTO) this.ventanaPersonaEditar.getComboPais().getSelectedItem();
-			PersonaDTO nuevaPersona = new PersonaDTO(id, nombre, tel, calle, alturaInt, pisoInt, depto, email, fCumple, idTipoContacto.getIdTipoContacto() , idlocalida.getId(), idProv.getIdProvincia() , idPais.getIdPais(), lugarTuristico);
+			PersonaDTO nuevaPersona = new PersonaDTO(id, nombre, tel, calle, alturaInt, pisoInt, depto, email, fCumple, idTipoContacto.getIdTipoContacto() , idlocalida.getId(), idProv.getIdProvincia() , idPais.getIdPais(), lugarTuristico, dominioEmail);
 			this.agenda.editarPersona(nuevaPersona);
 			this.refrescarTabla();
 			refrescarCombos();
