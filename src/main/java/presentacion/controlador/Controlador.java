@@ -284,6 +284,7 @@ public class Controlador implements ActionListener
 			String fCumple = ventanaPersona.getTxtFCumple().getText();
 			String lugarTuristico = this.ventanaPersona.getTextFieldLTuristico().getText();
 
+
 			String dominioEmail = getDominio(email);
 			
 			int alturaInt = Integer.parseInt(altura);
@@ -294,7 +295,7 @@ public class Controlador implements ActionListener
 			ProvinciaDTO idProvincia = (ProvinciaDTO) this.ventanaPersona.getComboProvincia().getSelectedItem();
 
 
-			PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel, calle, alturaInt, pisoInt, depto, email, fCumple, idLocalidad.getId(), idTipoContacto.getIdTipoContacto(), idProvincia.getIdProvincia(), idProvincia.getIdPais() , lugarTuristico , dominioEmail );
+			PersonaDTO nuevaPersona = new PersonaDTO(0, nombre, tel, calle, alturaInt, pisoInt, depto, email, fCumple, idLocalidad.getId(), idTipoContacto.getIdTipoContacto(), idProvincia.getIdProvincia(), idProvincia.getIdPais() , lugarTuristico, dominioEmail);
 			this.agenda.agregarPersona(nuevaPersona);
 			this.refrescarTabla();
 			this.ventanaPersona.cerrar();
@@ -388,15 +389,20 @@ public class Controlador implements ActionListener
 			this.ventanaPersonaEditar.mostrarVentana();
 
 		}
+		
 		public String getDominio (String email) {
 			return "hotmail.com";
 			
 		}
+		
+		
+		
+		
 		public void guardarEditarPersona(ActionEvent t)
 		{
 			try {
 
-					int id = Integer.parseInt(this.ventanaPersonaEditar.getText_ID().getText()) ;
+			int id = Integer.parseInt(this.ventanaPersonaEditar.getText_ID().getText()) ;
 			String nombre = this.ventanaPersonaEditar.getTxtNombre().getText();
 			String tel = this.ventanaPersonaEditar.getTxtTelefono().getText();
 			String calle = this.ventanaPersonaEditar.getTxtCalle().getText();

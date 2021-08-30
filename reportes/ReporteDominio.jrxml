@@ -2,12 +2,50 @@
 <!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteDominio" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="821f9646-38ad-4001-b023-fb779c30f447">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
-	<queryString language="SQL">
-		<![CDATA[SELECT count(dominiomail) , Nombre,
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="PorDominio"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="730"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="256"/>
+	<subDataset name="Grafico" uuid="5ee1486e-8361-41de-88b5-c8f929c9bbc8">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="PorDominio"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT count(dominioMail) as D,
+    Nombre,
 	lugarTur,
 	dominioMail
-FROM personas order by dominiomail]]>
+FROM personas  group by dominioMail
+order by dominiomail]]>
+		</queryString>
+		<field name="D" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="D"/>
+			<property name="com.jaspersoft.studio.field.label" value="D"/>
+		</field>
+		<field name="Nombre" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="Nombre"/>
+			<property name="com.jaspersoft.studio.field.label" value="Nombre"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="personas"/>
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="lugarTur" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="lugarTur"/>
+			<property name="com.jaspersoft.studio.field.label" value="lugarTur"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="personas"/>
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="dominioMail" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="dominioMail"/>
+			<property name="com.jaspersoft.studio.field.label" value="dominioMail"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="personas"/>
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<queryString language="SQL">
+		<![CDATA[SELECT 
+    Nombre,
+	lugarTur,
+	dominioMail
+FROM agenda.personas
+order by dominiomail]]>
 	</queryString>
 	<field name="Nombre" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="Nombre"/>
@@ -30,18 +68,18 @@ FROM personas order by dominiomail]]>
 	<variable name="dominioMail1" class="java.lang.Integer" resetType="Group" resetGroup="Dominio" calculation="Count">
 		<variableExpression><![CDATA[$F{dominioMail}]]></variableExpression>
 	</variable>
-	<variable name="dominioMail2" class="java.lang.Integer" resetType="Column" calculation="Count">
-		<variableExpression><![CDATA[$F{dominioMail}]]></variableExpression>
-	</variable>
-	<variable name="dominioMail3" class="java.lang.Integer" calculation="Count">
+	<variable name="dominioMail2" class="java.lang.Integer" calculation="Count">
 		<variableExpression><![CDATA[$F{dominioMail}]]></variableExpression>
 	</variable>
 	<group name="Dominio">
 		<groupExpression><![CDATA[$F{dominioMail}]]></groupExpression>
 		<groupHeader>
-			<band height="39">
+			<band height="18">
+				<rectangle>
+					<reportElement x="0" y="0" width="552" height="18" uuid="b7eed9b2-f928-41d5-ae0d-eeaa3f1ae97e"/>
+				</rectangle>
 				<textField>
-					<reportElement x="10" y="0" width="100" height="18" uuid="4cb219d4-8be1-43d8-b5b9-444123b8efea"/>
+					<reportElement x="4" y="0" width="100" height="18" uuid="4cb219d4-8be1-43d8-b5b9-444123b8efea"/>
 					<textElement>
 						<font size="12" isBold="true"/>
 					</textElement>
@@ -49,6 +87,21 @@ FROM personas order by dominiomail]]>
 				</textField>
 			</band>
 		</groupHeader>
+		<groupFooter>
+			<band height="26">
+				<textField>
+					<reportElement x="460" y="2" width="100" height="18" uuid="e59a2496-5916-44d0-a7e0-0d12be52ec1d"/>
+					<textFieldExpression><![CDATA[$V{dominioMail1}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="418" y="2" width="40" height="14" uuid="420ed2b4-0add-4ca6-90d5-90f295eaef6d"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[TOTAL:]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
 	</group>
 	<background>
 		<band splitType="Stretch"/>
@@ -73,7 +126,7 @@ FROM personas order by dominiomail]]>
 				<reportElement x="0" y="4" width="550" height="24" uuid="266caed9-4b77-4b31-8d36-7db5113573ad"/>
 				<staticText>
 					<reportElement x="3" y="2" width="160" height="20" uuid="2a47f7d3-6778-4f34-8589-b4dd397f4745"/>
-					<text><![CDATA[Reporte para el ejemplo Agenda]]></text>
+					<text><![CDATA[Reporte agrupamiento por Dominio]]></text>
 				</staticText>
 			</frame>
 		</band>
@@ -100,37 +153,41 @@ FROM personas order by dominiomail]]>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="32" splitType="Stretch">
+		<band height="27" splitType="Stretch">
 			<textField>
-				<reportElement x="280" y="10" width="111" height="21" uuid="66c90180-e778-4522-9231-30c1720fa032"/>
+				<reportElement x="280" y="4" width="111" height="18" uuid="66c90180-e778-4522-9231-30c1720fa032"/>
 				<textFieldExpression><![CDATA[$F{lugarTur}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="84" y="13" width="100" height="18" uuid="18713100-7de3-4593-8623-5bad1c71a283"/>
+				<reportElement x="84" y="4" width="100" height="18" uuid="18713100-7de3-4593-8623-5bad1c71a283"/>
 				<textFieldExpression><![CDATA[$F{Nombre}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="9" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="13" splitType="Stretch"/>
+		<band height="4" splitType="Stretch"/>
 	</pageFooter>
 	<summary>
-		<band height="305" splitType="Stretch">
+		<band height="273" splitType="Stretch">
 			<pieChart>
 				<chart evaluationTime="Report">
-					<reportElement x="184" y="52" width="200" height="200" uuid="f7c25206-7068-4f6d-a47d-00f589cf4cfb"/>
+					<reportElement x="110" y="30" width="250" height="243" uuid="d2cc3512-3b72-4218-a810-63e5d9b09383"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
 				</chart>
 				<pieDataset>
-					<dataset resetType="Report"/>
-					<keyExpression><![CDATA[$V$F{dominioMail}]]></keyExpression>
-					<valueExpression><![CDATA[$V{Dominio_COUNT}]]></valueExpression>
-					<labelExpression><![CDATA[$F{dominioMail}]]></labelExpression>
+					<dataset resetType="Report">
+						<datasetRun subDataset="Grafico" uuid="2d9bff27-c0af-465c-b533-8597d69f397e">
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+					</dataset>
+					<keyExpression><![CDATA[$F{dominioMail}]]></keyExpression>
+					<valueExpression><![CDATA[$F{D}]]></valueExpression>
+					<labelExpression><![CDATA[$F{D}+""]]></labelExpression>
 				</pieDataset>
 				<piePlot>
 					<plot/>

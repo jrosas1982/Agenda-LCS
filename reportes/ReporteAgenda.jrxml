@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" whenNoDataType="NoPages" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="284e0c88-a4b2-4ff8-98a2-d67b80bcffaf">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<subDataset name="Dataset1" uuid="b241a9d4-11bd-4a9b-a47c-aba9c06d1918">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -15,6 +15,12 @@
 		<field name="email" class="java.lang.String">
 			<fieldDescription><![CDATA[email]]></fieldDescription>
 		</field>
+	</subDataset>
+	<subDataset name="Dataset2" uuid="f3f83c34-1f2f-4518-bbc8-520979e4411f">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
 	</subDataset>
 	<parameter name="Fecha" class="java.lang.String"/>
 	<queryString language="SQL">
@@ -35,34 +41,28 @@
 	<field name="email" class="java.lang.String">
 		<fieldDescription><![CDATA[email]]></fieldDescription>
 	</field>
-	<variable name="email1" class="java.lang.Integer" resetType="Group" resetGroup="Grupo1" calculation="Count">
-		<variableExpression><![CDATA[$F{email}]]></variableExpression>
+	<field name="dominioEmail" class="java.lang.String">
+		<fieldDescription><![CDATA[dominioEmail]]></fieldDescription>
+	</field>
+	<variable name="dominioEmail2" class="java.lang.Integer" resetType="Group" resetGroup="Por Dominio" calculation="Count">
+		<variableExpression><![CDATA[$F{dominioEmail}]]></variableExpression>
 	</variable>
-	<variable name="email2" class="java.lang.Integer" resetType="Group" resetGroup="Grupo1" calculation="Count">
-		<variableExpression><![CDATA[$F{email}]]></variableExpression>
-	</variable>
-	<group name="Grupo1">
-		<groupExpression><![CDATA[$F{nombre}]]></groupExpression>
+	<group name="Por Dominio">
+		<groupExpression><![CDATA[$F{dominioEmail}]]></groupExpression>
 		<groupHeader>
-			<band height="38">
+			<band height="24">
 				<textField>
-					<reportElement x="5" y="10" width="125" height="20" uuid="c251a21a-d27b-49d4-9173-a1aa2fe1b792"/>
-					<textFieldExpression><![CDATA[$F{email}.substring( 2 )
-]]></textFieldExpression>
+					<reportElement x="0" y="0" width="100" height="20" uuid="7298d693-0a68-420b-8aac-144a170259b8"/>
+					<textFieldExpression><![CDATA[$F{dominioEmail}]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="47">
+			<band height="30">
 				<textField>
-					<reportElement x="440" y="27" width="127" height="16" uuid="967fa0db-b095-4009-bdd2-bb849b763b02"/>
-					<textFieldExpression><![CDATA[$V{email2}
-]]></textFieldExpression>
+					<reportElement x="452" y="0" width="100" height="20" uuid="bdc7e7be-8520-4bb3-b6a8-e3faac8cbe7e"/>
+					<textFieldExpression><![CDATA[$V{dominioEmail2}]]></textFieldExpression>
 				</textField>
-				<staticText>
-					<reportElement x="367" y="27" width="100" height="16" uuid="83704d90-4794-4658-8a2c-c21957094630"/>
-					<text><![CDATA[TOTAL]]></text>
-				</staticText>
 			</band>
 		</groupFooter>
 	</group>
@@ -131,7 +131,7 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="55" splitType="Stretch">
+		<band height="22" splitType="Stretch">
 			<textField>
 				<reportElement x="5" y="0" width="180" height="18" uuid="4a345b01-b751-4529-b6d6-2ccf3c13ff66"/>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>

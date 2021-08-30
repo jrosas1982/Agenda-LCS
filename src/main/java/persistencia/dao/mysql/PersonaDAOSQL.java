@@ -13,12 +13,12 @@ import persistencia.dao.interfaz.PersonaDAO;
 
 public class PersonaDAOSQL implements PersonaDAO
 {
-	private static final String insert = "INSERT INTO personas(idPersona, nombre, telefono, calle, altura, piso, depto, email, f_cumpleaños , idTipoContacto, idLocalidad , idProvincia , idPais, lugarTur , dominioMail) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String insert = "INSERT INTO personas(idPersona, nombre, telefono, calle, altura, piso, depto, email, f_cumpleaños , idTipoContacto, idLocalidad , idProvincia , idPais, lugarTur, dominioMail) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String delete = "DELETE FROM personas WHERE idPersona = ?";
 	private static final String readall = "SELECT * FROM personas";
-	private static final String update = "UPDATE personas SET nombre = ?, telefono = ?, calle = ?, altura = ?, piso = ?, depto = ?, email = ?, f_cumpleaños = ? , idTipoContacto = ?, idLocalidad = ? , idProvincia = ?  , idPais = ? , lugarTur = ? , dominioMail = ? WHERE idPersona = ?";
+	private static final String update = "UPDATE personas SET nombre = ?, telefono = ?, calle = ?, altura = ?, piso = ?, depto = ?, email = ?, f_cumpleaños = ? , idTipoContacto = ?, idLocalidad = ? , idProvincia = ?  , idPais = ? , lugarTur = ?, dominioMail = ? WHERE idPersona = ?";
 
-	private static final String getById= "  SELECT idPersona, ap.Nombre, Telefono, calle, altura, piso, f_cumpleaños, email, depto, atip.nombre, al.nombre , apr.nombre , aps.nombre , lugarTur, dominioMail FROM agenda.personas ap\r\n"
+	private static final String getById= "  SELECT idPersona, ap.Nombre, Telefono, calle, altura, piso, f_cumpleaños, email, depto, atip.nombre, al.nombre , apr.nombre , aps.nombre , lugarTur FROM agenda.personas ap\r\n"
 			+ " left join   agenda.tipocontacto atip\r\n"
 			+ " on  ap.idTipoContacto = atip.id\r\n"
 			+ " left join agenda.localidad al\r\n"
@@ -152,11 +152,11 @@ public class PersonaDAOSQL implements PersonaDAO
 		String lugatT = resultSet.getString("lugarTur");
 		String dominioEmail = resultSet.getString("dominioMail");
 		
-		//PersonaDTO retPersona =  new PersonaDTO(id, nombre, tel, calle, altura, piso, depto, email, fCumple, nombreLocalidad, nombreTipoContacto, nombreProvincia, nombrePais, lugatT);
 		PersonaDTO retPersona =  new PersonaDTO(id, nombre, tel, calle, altura, piso, depto, email, fCumple, nombreLocalidad, nombreTipoContacto, nombreProvincia, nombrePais, lugatT, dominioEmail);
 
 //		PersonaDTO retPersona =  new PersonaDTO(id, nombre, tel, calle, altura, piso, depto, email, fCumple, nombreLocalidad, nombreTipoContacto, nombreProvincia, nombrePais);
 //		retPersona.setLugarTuristico(lugatT);
+//		retPersona.setDominioEmail(dominioEmail);
 		return retPersona;
 	}
 
@@ -183,6 +183,7 @@ public class PersonaDAOSQL implements PersonaDAO
 			statement.setString(13, persona.getLugarTuristico());
 			statement.setString(14, persona.getDominioEmail());
 			statement.setInt(15, persona.getIdPersona());
+			
 			
 			if(statement.executeUpdate() > 0)
 			{

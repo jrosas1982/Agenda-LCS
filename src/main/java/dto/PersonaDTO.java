@@ -44,9 +44,9 @@ public class PersonaDTO
 //		this.nombreProvincia = nombreProvincia;
 //		this.nombrePais = nombrePais;
 //	}
+
 	
-	
-	public PersonaDTO(int idPersona, String nombre, String telefono, String calle, int altura, int piso, String depto, String email, String fCumple, int idLocalidad, int idTipoContacto , int idProvincia , int idPais, String LugarTuristico, String dominioEmail)
+	public PersonaDTO(int idPersona, String nombre, String telefono, String calle, int altura, int piso, String depto, String email, String fCumple, int idLocalidad, int idTipoContacto , int idProvincia , int idPais, String LugarTuristico,  String dominioEmail)
 	{
 		this.idPersona = idPersona;
 		this.nombre = nombre;
@@ -118,10 +118,12 @@ public class PersonaDTO
 		this.LugarTuristico = LugarTuristico;
 	}
 
+
 	public PersonaDTO() {
-
 	}
-
+	
+	
+	
 	public int getIdPais() {
 		return idPais;
 	}
@@ -306,13 +308,14 @@ public class PersonaDTO
 		LugarTuristico = lugarTuristico;
 	}
 
+
 	public String getDominioEmail() {
 		return dominioEmail;
 	}
 
+
 	public void setDominioEmail(String dominioEmail) {
 		this.dominioEmail = dominioEmail;
 	}
-
-
+	
 }
