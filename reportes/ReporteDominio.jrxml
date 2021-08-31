@@ -187,7 +187,6 @@ order by dominiomail]]>
 					</dataset>
 					<keyExpression><![CDATA[$F{dominioMail}]]></keyExpression>
 					<valueExpression><![CDATA[$F{D}]]></valueExpression>
-					<labelExpression><![CDATA[$F{D}+""]]></labelExpression>
 				</pieDataset>
 				<piePlot labelFormat="{2}">
 					<plot/>
