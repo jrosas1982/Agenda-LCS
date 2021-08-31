@@ -37,6 +37,9 @@ public class Controlador implements ActionListener
 
 		public Controlador(Vista vista, Agenda agenda)
 		{
+			
+			
+			//-- 
 			this.vista = vista;
 			this.vista.getBtnAgregar().addActionListener(a->ventanaAgregarPersona(a));
 			this.vista.getBtnBorrar().addActionListener(s->borrarPersona(s));
@@ -305,6 +308,7 @@ public class Controlador implements ActionListener
 			ReporteAgenda reporte = new ReporteAgenda(agenda.obtenerPersonas());
 			reporte.mostrar();
 		}
+	
 
 		public void borrarPersona(ActionEvent s)
 		{
@@ -322,6 +326,7 @@ public class Controlador implements ActionListener
 			this.refrescarTablaContacto();
 			this.vista.show();
 		}
+		
 		private void refrescarCombos()
 		{
 			this.ventanaLocalidad.getComboPais().removeAllItems();

@@ -18,7 +18,7 @@ public class PersonaDAOSQL implements PersonaDAO
 	private static final String readall = "SELECT * FROM personas";
 	private static final String update = "UPDATE personas SET nombre = ?, telefono = ?, calle = ?, altura = ?, piso = ?, depto = ?, email = ?, f_cumpleaños = ? , idTipoContacto = ?, idLocalidad = ? , idProvincia = ?  , idPais = ? , lugarTur = ?, dominioMail = ? WHERE idPersona = ?";
 
-	private static final String getById= "  SELECT idPersona, ap.Nombre, Telefono, calle, altura, piso, f_cumpleaños, email, depto, atip.nombre, al.nombre , apr.nombre , aps.nombre , lugarTur FROM agenda.personas ap\r\n"
+	private static final String getById= "  SELECT idPersona, ap.Nombre, Telefono, calle, altura, piso, f_cumpleaños, email, depto, atip.nombre, al.nombre , apr.nombre , aps.nombre , lugarTur, dominioMail FROM agenda.personas ap\r\n"
 			+ " left join   agenda.tipocontacto atip\r\n"
 			+ " on  ap.idTipoContacto = atip.id\r\n"
 			+ " left join agenda.localidad al\r\n"
