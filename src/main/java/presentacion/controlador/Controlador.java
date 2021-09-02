@@ -35,10 +35,10 @@ public class Controlador implements ActionListener
 
 		private Agenda agenda;
 
+		
+		
 		public Controlador(Vista vista, Agenda agenda)
 		{
-			
-			
 			//-- 
 			this.vista = vista;
 			this.vista.getBtnAgregar().addActionListener(a->ventanaAgregarPersona(a));
