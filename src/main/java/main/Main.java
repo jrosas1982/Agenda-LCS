@@ -1,11 +1,7 @@
 package main;
 
-import modelo.Agenda;
-import persistencia.dao.mysql.DAOSQLFactory;
-import presentacion.controlador.Controlador;
 import presentacion.controlador.ControllerLogin;
 import presentacion.vista.Login;
-import presentacion.vista.Vista;
 
 
 public class Main

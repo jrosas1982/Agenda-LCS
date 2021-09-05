@@ -53,7 +53,7 @@ public class VentanaPersonaEditar extends JFrame
 			return INSTANCE;
 	}
 
-	
+
 	private VentanaPersonaEditar()
 	{
 		super();
@@ -197,26 +197,26 @@ public class VentanaPersonaEditar extends JFrame
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNewLabel_1.setBounds(251, 135, 46, 14);
 		panel.add(lblNewLabel_1);
-		
+
 		JLabel lblContacto = new JLabel("Datos de contacto");
 		lblContacto.setHorizontalAlignment(SwingConstants.CENTER);
 		lblContacto.setBounds(11, 13, 287, 14);
 		panel.add(lblContacto);
-		
+
 		JLabel lblLugarTuristcoPreferido = new JLabel("Lugar Turistco Preferido");
 		lblLugarTuristcoPreferido.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLugarTuristcoPreferido.setBounds(11, 233, 287, 14);
 		panel.add(lblLugarTuristcoPreferido);
-		
+
 		JLabel lblLugarTuristico = new JLabel("Lugar Turistico");
 		lblLugarTuristico.setBounds(10, 271, 113, 14);
 		panel.add(lblLugarTuristico);
-		
+
 		textFieldLTuristico = new JTextField();
 		textFieldLTuristico.setColumns(10);
 		textFieldLTuristico.setBounds(139, 268, 159, 20);
 		panel.add(textFieldLTuristico);
-		
+
 		text_ID = new JTextField();
 		text_ID.setBounds(10, 378, 86, 20);
 		text_ID.setVisible(false);

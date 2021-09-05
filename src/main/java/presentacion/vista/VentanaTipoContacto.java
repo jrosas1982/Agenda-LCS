@@ -7,17 +7,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import dto.PersonaDTO;
 import dto.TipoContactoDTO;
-
-import javax.swing.JTabbedPane;
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
 
 public class VentanaTipoContacto extends JFrame
 {
@@ -31,8 +28,8 @@ public class VentanaTipoContacto extends JFrame
 	private JTable table;
 	private JButton btnEditar ;
 	private JButton btnBorrar ;
-	
-	
+
+
 	public static VentanaTipoContacto getInstance()
 	{
 		if(INSTANCE == null)
@@ -73,12 +70,12 @@ public class VentanaTipoContacto extends JFrame
 		btnAgregarContacto = new JButton("Agregar");
 		btnAgregarContacto.setBounds(10, 189, 89, 23);
 		panel.add(btnAgregarContacto);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 11, 386, 122);
 		panel.add(scrollPane);
-		
-		
+
+
 
 		modelTipoContacto = new DefaultTableModel(null,nombreColumnas);
 		table = new JTable(modelTipoContacto);
@@ -86,18 +83,18 @@ public class VentanaTipoContacto extends JFrame
 		table.getColumnModel().getColumn(0).setResizable(false);
 		table.getColumnModel().getColumn(1).setPreferredWidth(100);
 		table.getColumnModel().getColumn(1).setResizable(false);
-		
+
 		scrollPane.setViewportView(table);
-		
+
 		btnEditar = new JButton("Editar");
 		btnEditar.setBounds(166, 189, 89, 23);
 		panel.add(btnEditar);
-		
+
 		btnBorrar = new JButton("Borrar");
 		btnBorrar.setBounds(307, 189, 89, 23);
 		panel.add(btnBorrar);
-		
-		
+
+
 		this.setVisible(false);
 	}
 
@@ -120,7 +117,7 @@ public class VentanaTipoContacto extends JFrame
 		this.txtNombreContacto.setText(null);
 		this.dispose();
 	}
-	
+
 
 	public DefaultTableModel getModelTipoContacto() {
 		return modelTipoContacto;
@@ -141,7 +138,7 @@ public class VentanaTipoContacto extends JFrame
 	{
 		return nombreColumnas;
 	}
-	
+
 	public JButton getBtnEditar() {
 		return btnEditar;
 	}

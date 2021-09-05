@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
@@ -15,9 +16,6 @@ import dto.LocalidadDTO;
 import dto.PaisDTO;
 import dto.ProvinciaDTO;
 import dto.TipoContactoDTO;
-import javax.swing.SwingConstants;
-import java.awt.Component;
-import javax.swing.Box;
 
 public class VentanaPersona extends JFrame
 {
@@ -196,21 +194,21 @@ public class VentanaPersona extends JFrame
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNewLabel_1.setBounds(251, 135, 46, 14);
 		panel.add(lblNewLabel_1);
-		
+
 		JLabel lblContacto = new JLabel("Datos de contacto");
 		lblContacto.setHorizontalAlignment(SwingConstants.CENTER);
 		lblContacto.setBounds(11, 13, 287, 14);
 		panel.add(lblContacto);
-		
+
 		JLabel lblLugarTuristcoPreferido = new JLabel("Lugar Turistco Preferido");
 		lblLugarTuristcoPreferido.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLugarTuristcoPreferido.setBounds(11, 233, 287, 14);
 		panel.add(lblLugarTuristcoPreferido);
-		
+
 		JLabel lblLugarTuristico = new JLabel("Lugar Turistico");
 		lblLugarTuristico.setBounds(10, 271, 113, 14);
 		panel.add(lblLugarTuristico);
-		
+
 		textFieldLTuristico = new JTextField();
 		textFieldLTuristico.setColumns(10);
 		textFieldLTuristico.setBounds(139, 268, 159, 20);

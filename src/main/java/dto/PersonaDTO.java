@@ -2,8 +2,6 @@ package dto;
 
 public class PersonaDTO
 {
-
-
 	private int idPersona;
 	private String nombre;
 	private String telefono;
@@ -23,7 +21,7 @@ public class PersonaDTO
 	private String nombrePais;
 	private String LugarTuristico;
 	private String dominioEmail;
-	
+
 //	refactor
 //	private DomicilioDTO domicilio;
 //
@@ -45,7 +43,7 @@ public class PersonaDTO
 //		this.nombrePais = nombrePais;
 //	}
 
-	
+
 	public PersonaDTO(int idPersona, String nombre, String telefono, String calle, int altura, int piso, String depto, String email, String fCumple, int idLocalidad, int idTipoContacto , int idProvincia , int idPais, String LugarTuristico,  String dominioEmail)
 	{
 		this.idPersona = idPersona;
@@ -63,7 +61,7 @@ public class PersonaDTO
 		this.LugarTuristico = LugarTuristico;
 		this.dominioEmail = dominioEmail;
 	}
-	
+
 	public PersonaDTO(int idPersona, String nombre, String telefono, String calle, int altura, int piso, String depto, String email, String fCumple, int idLocalidad, int idTipoContacto , int idProvincia , int idPais)
 	{
 		this.idPersona = idPersona;
@@ -98,7 +96,7 @@ public class PersonaDTO
 		this.nombrePais = nombrePais;
 		this.LugarTuristico = LugarTuristico;
 		this.dominioEmail = dominioEmail;
-		
+
 	}
 	public PersonaDTO(int idPersona, String nombre, String telefono, String calle, int altura, int piso, String depto, String email, String fCumple, String nombreLocalidad, String nombreContacto , String nombreProvincia , String nombrePais)
 	{
@@ -121,9 +119,9 @@ public class PersonaDTO
 
 	public PersonaDTO() {
 	}
-	
-	
-	
+
+
+
 	public int getIdPais() {
 		return idPais;
 	}
@@ -317,5 +315,5 @@ public class PersonaDTO
 	public void setDominioEmail(String dominioEmail) {
 		this.dominioEmail = dominioEmail;
 	}
-	
+
 }

@@ -17,7 +17,7 @@ public class Conexion
 	private String Puerto;
 	private String base;
 
-	
+
 
 	private Conexion()
 	{
@@ -53,7 +53,7 @@ public class Conexion
 			log.error("Conexión fallida", e);
 		}
 	}
-	
+
 	public static Conexion getConexionLogin(String server ,  String User , String pass)
 	{
 		if(instancia == null)
@@ -130,5 +130,5 @@ public class Conexion
 	public void setBase(String base) {
 		this.base = base;
 	}
-	
+
 }

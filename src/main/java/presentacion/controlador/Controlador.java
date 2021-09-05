@@ -35,11 +35,11 @@ public class Controlador implements ActionListener
 
 		private Agenda agenda;
 
-		
-		
+
+
 		public Controlador(Vista vista, Agenda agenda)
 		{
-			//-- 
+			//--
 			this.vista = vista;
 			this.vista.getBtnAgregar().addActionListener(a->ventanaAgregarPersona(a));
 			this.vista.getBtnBorrar().addActionListener(s->borrarPersona(s));
@@ -59,7 +59,7 @@ public class Controlador implements ActionListener
 			this.ventanaTipoContacto.getBtnAgregarTipoContacto().addActionListener(c->guardarTipoContacto(c));
 			this.ventanaTipoContacto.getBtnBorrar().addActionListener(c->borrarTipoContacto(c));
 
-			
+
 			//-- Tipo de Pais
 			this.vista.getBtnPaisABM().addActionListener(d->ventanaAgregarPais(d));
 			this.ventanaPais = VentanaPais.getInstance();
@@ -167,7 +167,7 @@ public class Controlador implements ActionListener
 			this.ventanaTipoContacto.getTxtNombreContacto().setText("");
 			this.refrescarTablaContacto();
 		}
-		
+
 
 
 		///--------- Persona
@@ -214,7 +214,7 @@ public class Controlador implements ActionListener
 			// TODO: handle exception
 		}
 		}
-		
+
 		private void refreshProvinciaPersonaEditar(ActionEvent u) {
 
 			this.ventanaPersonaEditar.getComboProvincia().removeAllItems();
@@ -255,7 +255,7 @@ public class Controlador implements ActionListener
 		}
 
 		}
-		
+
 		private void refreshLocalidadPersonaEditar(ActionEvent z) {
 
 			this.ventanaPersonaEditar.getComboLocalidad().removeAllItems();
@@ -289,7 +289,7 @@ public class Controlador implements ActionListener
 
 
 			String dominioEmail = getDominio(email);
-			
+
 			int alturaInt = Integer.parseInt(altura);
 			int pisoInt = Integer.parseInt(piso);
 
@@ -308,7 +308,7 @@ public class Controlador implements ActionListener
 			ReporteAgenda reporte = new ReporteAgenda(agenda.obtenerPersonas());
 			reporte.mostrar();
 		}
-	
+
 
 		public void borrarPersona(ActionEvent s)
 		{
@@ -326,7 +326,7 @@ public class Controlador implements ActionListener
 			this.refrescarTablaContacto();
 			this.vista.show();
 		}
-		
+
 		private void refrescarCombos()
 		{
 			this.ventanaLocalidad.getComboPais().removeAllItems();
@@ -337,7 +337,7 @@ public class Controlador implements ActionListener
 			this.ventanaPersonaEditar.getComboPais().removeAllItems();
 
 		}
-	
+
 		private void refrescarTabla()
 		{
 			this.personasEnTabla = agenda.obtenerPersonas();
@@ -372,7 +372,7 @@ public class Controlador implements ActionListener
 				this.ventanaPersonaEditar.getTxtPiso().setText(String.valueOf(persona.getPiso()));
 				this.ventanaPersonaEditar.getTxtDepto().setText(persona.getDepto());
 				this.ventanaPersonaEditar.getTextFieldLTuristico().setText(persona.getLugarTuristico());
-				
+
 				List<PaisDTO> listaPaises = new ArrayList<>();
 				listaPaises = agenda.obtenerPaises();
 				for (PaisDTO paisDTO : listaPaises) {
@@ -394,15 +394,15 @@ public class Controlador implements ActionListener
 			this.ventanaPersonaEditar.mostrarVentana();
 
 		}
-		
+
 		public String getDominio (String email) {
 			return "hotmail.com";
-			
+
 		}
-		
-		
-		
-		
+
+
+
+
 		public void guardarEditarPersona(ActionEvent t)
 		{
 			try {
@@ -417,9 +417,9 @@ public class Controlador implements ActionListener
 			String fCumple = this.ventanaPersonaEditar.getTxtFCumple().getText();
 			int pisoInt = Integer.parseInt(this.ventanaPersonaEditar.getTxtPiso().getText());
 			String lugarTuristico = this.ventanaPersonaEditar.getTextFieldLTuristico().getText();
-			
+
 			String dominioEmail = getDominio(email);
-			
+
 			TipoContactoDTO idTipoContacto = (TipoContactoDTO) this.ventanaPersonaEditar.getComboTipoContacto().getSelectedItem();
 
 			LocalidadDTO idlocalida = (LocalidadDTO) this.ventanaPersonaEditar.getComboLocalidad().getSelectedItem();
@@ -437,14 +437,14 @@ public class Controlador implements ActionListener
 			this.refrescarTabla();
 			this.ventanaPersonaEditar.cerrar();
 		}
-		
+
 
 		private void refrescarTablaContacto()
 		{
 			this.contactoTabla = agenda.obtenerTipoContactos();
 			this.ventanaTipoContacto.llenarTabla(contactoTabla);
 		}
-		
+
 		public void borrarTipoContacto(ActionEvent s)
 		{
 			int[] filasSeleccionadas = this.ventanaTipoContacto.getTable().getSelectedRows();

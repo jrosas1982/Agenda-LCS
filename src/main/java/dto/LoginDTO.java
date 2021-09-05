@@ -5,7 +5,7 @@ public class LoginDTO {
 	private String Usuario;
 	private String Pass;
 	private String Server;
-	
+
 	public LoginDTO(String usuario, String pass, String server) {
 		super();
 		Usuario = usuario;

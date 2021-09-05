@@ -1,17 +1,12 @@
 package presentacion.vista;
 
-import javax.swing.AbstractButton;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
-
-import dto.PaisDTO;
-import dto.ProvinciaDTO;
 
 public class Login extends JFrame
 {
@@ -71,17 +66,17 @@ public class Login extends JFrame
 		JLabel lblNomProvincia = new JLabel("Usuario");
 		lblNomProvincia.setBounds(10, 52, 113, 14);
 		panel.add(lblNomProvincia);
-		
+
 		textUser = new JTextField();
 		textUser.setColumns(10);
 		textUser.setBounds(133, 49, 164, 20);
 		panel.add(textUser);
-		
+
 		textHost = new JTextField();
 		textHost.setColumns(10);
 		textHost.setBounds(133, 8, 164, 20);
 		panel.add(textHost);
-		
+
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(208, 142, 89, 23);
 		panel.add(btnCancelar);
